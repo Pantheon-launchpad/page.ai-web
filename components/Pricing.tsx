@@ -58,7 +58,7 @@ export default function Pricing() {
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {plans.map((p, i) => (
-            <Reveal key={p.name} delay={i * 90}>
+            <Reveal key={p.name} delay={i * 90} direction="scale">
               <TiltCard intensity={p.featured ? 6 : 9} className="h-full rounded-3xl">
               <div
                 className={`relative flex h-full flex-col rounded-3xl p-8 ${

@@ -16,17 +16,17 @@ const features = [
   {
     icon: "M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
     title: "Quizzes that adapt",
-    body: "Short quizzes after every lesson adjust to your level, so practice always feels just right — not too hard, not too easy.",
+    body: "Short quizzes after every lesson adjust to your level. Practice always feels just right.",
   },
   {
     icon: "M12 2c2 3 5 6 5 10a5 5 0 0 1-10 0c0-1.4.6-2.6 1.3-3.7C9 10 9.5 11 10.5 11c1 0 1-1.2.5-2.3C10.2 6.9 10 4.4 12 2Z",
     title: "Streaks & goals",
-    body: "Daily streaks, XP, and weekly goals keep motivation high — progress syncs whenever you next find a connection.",
+    body: "Daily streaks, XP, and weekly goals keep motivation high. Progress syncs next time you're online.",
   },
   {
     icon: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z",
     title: "A whole library of subjects",
-    body: "Maths, Science, English, History and more — aligned to school curricula for learners ages 6 to 16.",
+    body: "Maths, Science, English, History and more, aligned to school curricula for ages 6 to 16.",
   },
   {
     icon: "M17 6H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2ZM21 10v4M10 10v4M13 10v4",
@@ -48,7 +48,7 @@ export default function Features() {
             Everything a curious mind needs
           </h2>
           <p className="mt-4 text-ink-soft">
-            Built for learners everywhere — every feature works with zero connection.
+            Built for learners everywhere. Every feature works with zero connection.
           </p>
         </Reveal>
 

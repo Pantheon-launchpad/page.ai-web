@@ -11,8 +11,8 @@ export default function Footer() {
               Page.AI
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
-              Learning that works everywhere — even with no signal. Page.AI
-              brings an AI tutor and full lessons offline.
+              Learning that works everywhere, even with no signal.
+              An AI tutor and full lessons, offline.
             </p>
           </div>
 

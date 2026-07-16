@@ -29,9 +29,9 @@ export default function Hero() {
 
           <Appear delay={160}>
             <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-ink-soft">
-              Page.AI packs full lessons, quizzes, and a patient AI tutor into one
-              app that works anywhere — the back of a bus, a village with no
-              towers, or 30,000 feet with the WiFi off.
+              Full lessons, quizzes, and a patient AI tutor in one app.
+              Works on the back of a bus, in a village with no towers,
+              or at 30,000 feet with the WiFi off.
             </p>
           </Appear>
 
@@ -56,8 +56,8 @@ export default function Hero() {
 
           <Appear delay={320}>
             <div className="mt-10 flex items-center gap-2 font-mono text-[13px] text-ink-soft">
-              <span className="text-ember">★★★★★</span>
-              <span>4.9 rating — loved by 200k learners and their parents</span>
+              <span className="animate-pop-in text-ember">★★★★★</span>
+              <span>4.9 rating, loved by 200k learners and their parents</span>
             </div>
           </Appear>
         </div>

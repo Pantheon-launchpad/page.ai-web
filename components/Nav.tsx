@@ -30,7 +30,7 @@ export default function Nav() {
 
         <div className="hidden items-center gap-8 rounded-full border border-ink/10 bg-white/50 px-7 py-3 font-mono text-[13px] uppercase tracking-wide text-ink-soft backdrop-blur-xl md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="transition-colors hover:text-signal">
+            <a key={l.href} href={l.href} className="nav-link transition-colors hover:text-signal">
               {l.label}
             </a>
           ))}

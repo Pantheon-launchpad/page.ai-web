@@ -5,7 +5,7 @@ const steps = [
   {
     n: "01",
     title: "Download once",
-    body: "Grab the app and pick your subjects whenever you have a connection — a school, a café, a friend's hotspot.",
+    body: "Grab the app and pick your subjects whenever you're connected. A school, a café, a friend's hotspot.",
   },
   {
     n: "02",
@@ -32,14 +32,14 @@ export default function HowItWorks() {
             Learning in three easy steps
           </h2>
           <p className="mt-4 text-ink-soft">
-            Set up once with WiFi, then learn anywhere — forever.
+            Set up once with WiFi. Then learn anywhere, forever.
           </p>
         </Reveal>
 
         <div className="relative mt-16 grid gap-5 md:grid-cols-3">
           <div className="pointer-events-none absolute left-0 right-0 top-[38px] hidden h-px bg-line md:block" />
           {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 90}>
+            <Reveal key={s.n} delay={i * 90} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
               <div className="glass-card relative h-full rounded-3xl p-7">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink font-mono text-[12px] text-paper">
                   {s.n}

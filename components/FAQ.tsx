@@ -7,7 +7,7 @@ import SignalMark from "./SignalMark";
 const faqs = [
   {
     q: "Does the AI tutor really work with no internet?",
-    a: "Yes. The tutor model, lessons, and quizzes are downloaded to your device once. After that, everything — including tutor explanations — runs locally, with no connection required.",
+    a: "Yes. The tutor model, lessons, and quizzes download to your device once. After that, everything runs locally, including tutor explanations. No connection required.",
   },
   {
     q: "How much storage does a subject take?",

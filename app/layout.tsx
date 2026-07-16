@@ -24,9 +24,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Page.AI — A friendly AI tutor that never needs a signal",
+  title: "Page.AI: A friendly AI tutor that never needs a signal",
   description:
-    "Page.AI packs full lessons, quizzes, and a patient AI tutor into one app that works anywhere — no WiFi required.",
+    "Page.AI packs full lessons, quizzes, and a patient AI tutor into one app that works anywhere. No WiFi required.",
 };
 
 export default function RootLayout({
