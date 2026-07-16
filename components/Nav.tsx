@@ -36,12 +36,17 @@ export default function Nav() {
           ))}
         </div>
 
-        <a
-          href="#pricing"
-          className="hidden items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep md:inline-flex"
-        >
-          Get the app
-        </a>
+        <div className="hidden items-center gap-4 md:flex">
+          <a href="/login" className="text-sm font-medium text-ink-soft transition-colors hover:text-ink">
+            Log in
+          </a>
+          <a
+            href="/signup"
+            className="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+          >
+            Get the app
+          </a>
+        </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -73,7 +78,14 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href="#pricing"
+            href="/login"
+            onClick={() => setOpen(false)}
+            className="rounded-lg px-3 py-2.5 text-center normal-case tracking-normal transition-colors hover:bg-signal-soft hover:text-signal-deep"
+          >
+            Log in
+          </a>
+          <a
+            href="/signup"
             onClick={() => setOpen(false)}
             className="mt-1 rounded-lg bg-ink px-3 py-2.5 text-center normal-case tracking-normal text-paper"
           >

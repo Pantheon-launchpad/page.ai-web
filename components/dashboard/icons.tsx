@@ -33,7 +33,23 @@ export type IconName =
   | "sparkle"
   | "signal"
   | "mic"
-  | "debate";
+  | "debate"
+  | "search"
+  | "filter"
+  | "pdf"
+  | "bookmark"
+  | "send"
+  | "check"
+  | "calendar"
+  | "star"
+  | "mail"
+  | "lock"
+  | "eye"
+  | "eyeOff"
+  | "shuffle"
+  | "refresh"
+  | "layers"
+  | "story";
 
 const paths: Record<IconName, string> = {
   home: "M4 11.5 12 4l8 7.5M6 9.5V20h5v-5.5h2V20h5V9.5",
@@ -71,6 +87,22 @@ const paths: Record<IconName, string> = {
   signal: "M4 20V14M10 20V9M16 20v-9M22 20V4",
   mic: "M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3ZM6 11a6 6 0 0 0 12 0M12 19v3",
   debate: "M8 10h.01M12 10h.01M16 10h.01M4 4h11v9H8l-4 4V4ZM20 9v11l-4-4h-3V9h7Z",
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3",
+  filter: "M4 5h16M7 12h10M10 19h4",
+  pdf: "M6 3h9l5 5v13H6V3ZM15 3v5h5M9 13h1.5a1.5 1.5 0 0 1 0 3H9v3M13.5 13v6h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-1Z",
+  bookmark: "M6 3.5h12V21l-6-4-6 4V3.5Z",
+  send: "M4 20l16-8L4 4l2 8-2 8Zm2-8h9",
+  check: "M20 6 9 17l-5-5",
+  calendar: "M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5ZM4 10h16M8 3v4M16 3v4",
+  star: "m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-3-5.3 3 1.1-6L3.4 9.4l6-.8L12 3Z",
+  mail: "M4 5.5h16v13H4v-13ZM4.3 6l7.7 6 7.7-6",
+  lock: "M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5V11ZM12 15v3",
+  eye: "M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
+  eyeOff: "M3 3l18 18M10.6 10.6a3 3 0 0 0 4.2 4.2M6.5 6.7C4 8.3 2.5 12 2.5 12S6 18.5 12 18.5c1.6 0 3-.4 4.2-1M9.9 5.6c.7-.1 1.4-.1 2.1-.1 6 0 9.5 6.5 9.5 6.5S20.4 15 18 16.9",
+  shuffle: "M4 6h3.5l9 12H20M4 18h3.5l2.5-3.3M16 6h4v4M20 6l-4.5 6M16 18h4v-4",
+  refresh: "M4 12a8 8 0 0 1 13.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.7L4 16M4 20v-4h4",
+  layers: "M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5",
+  story: "M5 4h11l3 3v13H5V4ZM8 9h8M8 13h8M8 17h5",
 };
 
 export function Icon({

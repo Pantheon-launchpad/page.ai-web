@@ -75,4 +75,12 @@ export const navSections: NavSection[] = [
   },
 ];
 
-export const builtRoutes = new Set(["/dashboard"]);
+export const builtRoutes = new Set([
+  "/dashboard",
+  "/subjects",
+  "/resources",
+  "/ai-tutor",
+  "/chat-with-book",
+  "/flashcards",
+  "/planner",
+]);
