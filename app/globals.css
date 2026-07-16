@@ -6,7 +6,7 @@
   --font-body: var(--font-inter);
   --font-mono: var(--font-plex-mono);
 
-  /* Color system — "paper & signal"
+  /* Color system - "paper & signal"
      A warm offline paper tone paired with a decisive signal blue.
      The blue is literal: it's the one signal Page.AI never needs. */
   --color-paper: #f6eee1;
@@ -23,8 +23,10 @@
   --color-moss: #52795f;
   --color-moss-soft: #dfe8dd;
 
-  --shadow-glass: 0 1px 1px rgba(22, 33, 58, 0.03), 0 12px 32px -16px rgba(22, 33, 58, 0.18);
-  --shadow-lift: 0 1px 1px rgba(22, 33, 58, 0.04), 0 24px 48px -20px rgba(22, 33, 58, 0.28);
+  --shadow-glass:
+    0 1px 1px rgba(22, 33, 58, 0.03), 0 12px 32px -16px rgba(22, 33, 58, 0.18);
+  --shadow-lift:
+    0 1px 1px rgba(22, 33, 58, 0.04), 0 24px 48px -20px rgba(22, 33, 58, 0.28);
 }
 
 html {
@@ -60,17 +62,25 @@ body {
   pointer-events: none;
   opacity: 0.5;
   mix-blend-mode: multiply;
-  background-image: radial-gradient(rgba(22, 33, 58, 0.05) 0.6px, transparent 0.6px);
+  background-image: radial-gradient(
+    rgba(22, 33, 58, 0.05) 0.6px,
+    transparent 0.6px
+  );
   background-size: 3px 3px;
 }
 
 /* Real glass: a bright top-left sheen, a darker bottom-right falloff, an inner
    rim light on the top edge, and enough saturation lift that whatever sits
-   behind the card still tints it — not just a flat white overlay. */
+   behind the card still tints it - not just a flat white overlay. */
 .glass-card {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.22) 55%, rgba(255, 255, 255, 0.3) 100%);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.22) 55%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
   backdrop-filter: blur(22px) saturate(165%);
   -webkit-backdrop-filter: blur(22px) saturate(165%);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -88,7 +98,12 @@ body {
   pointer-events: none;
   z-index: -1;
   opacity: 0;
-  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55) 40%, transparent 60%);
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 40%,
+    transparent 60%
+  );
   background-size: 220% 220%;
   background-position: 120% 0%;
   transition: opacity 0.4s ease;
@@ -101,61 +116,131 @@ body {
 
 .glass-card-deep {
   position: relative;
-  background: linear-gradient(155deg, rgba(38, 52, 84, 0.95) 0%, rgba(16, 24, 43, 0.92) 100%);
+  background: linear-gradient(
+    155deg,
+    rgba(38, 52, 84, 0.95) 0%,
+    rgba(16, 24, 43, 0.92) 100%
+  );
   backdrop-filter: blur(22px) saturate(165%);
   -webkit-backdrop-filter: blur(22px) saturate(165%);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), var(--shadow-lift);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    var(--shadow-lift);
 }
 
 @keyframes shine-sweep {
-  from { background-position: 120% 0%; }
-  to { background-position: -20% 100%; }
+  from {
+    background-position: 120% 0%;
+  }
+  to {
+    background-position: -20% 100%;
+  }
 }
 
 @keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes float-y-sm {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -24px) scale(1.08); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -24px) scale(1.08);
+  }
 }
 
 @keyframes drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-24px, 20px) scale(1.05); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-24px, 20px) scale(1.05);
+  }
 }
 
-.animate-float { animation: float-y 5.5s ease-in-out infinite; }
-.animate-float-sm { animation: float-y-sm 4.2s ease-in-out infinite; animation-delay: 0.6s; }
-.animate-drift-1 { animation: drift-1 14s ease-in-out infinite; }
-.animate-drift-2 { animation: drift-2 17s ease-in-out infinite; }
+.animate-float {
+  animation: float-y 5.5s ease-in-out infinite;
+}
+.animate-float-sm {
+  animation: float-y-sm 4.2s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+.animate-drift-1 {
+  animation: drift-1 14s ease-in-out infinite;
+}
+.animate-drift-2 {
+  animation: drift-2 17s ease-in-out infinite;
+}
 
 @keyframes bars-fill {
-  0%, 100% { transform: scaleY(0.35); opacity: 0.5; }
-  50% { transform: scaleY(1); opacity: 1; }
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
-.bar-anim-1 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 0ms; transform-origin: bottom; }
-.bar-anim-2 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 160ms; transform-origin: bottom; }
-.bar-anim-3 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 320ms; transform-origin: bottom; }
-.bar-anim-4 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 480ms; transform-origin: bottom; }
+.bar-anim-1 {
+  animation: bars-fill 2.2s ease-in-out infinite;
+  animation-delay: 0ms;
+  transform-origin: bottom;
+}
+.bar-anim-2 {
+  animation: bars-fill 2.2s ease-in-out infinite;
+  animation-delay: 160ms;
+  transform-origin: bottom;
+}
+.bar-anim-3 {
+  animation: bars-fill 2.2s ease-in-out infinite;
+  animation-delay: 320ms;
+  transform-origin: bottom;
+}
+.bar-anim-4 {
+  animation: bars-fill 2.2s ease-in-out infinite;
+  animation-delay: 480ms;
+  transform-origin: bottom;
+}
 
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal-left { transform: translate(-22px, 0); }
-.reveal-right { transform: translate(22px, 0); }
-.reveal-scale { transform: scale(0.94); }
+.reveal-left {
+  transform: translate(-22px, 0);
+}
+.reveal-right {
+  transform: translate(22px, 0);
+}
+.reveal-scale {
+  transform: scale(0.94);
+}
 .reveal.is-visible {
   opacity: 1;
   transform: translate(0, 0) scale(1);
@@ -183,24 +268,75 @@ body {
 
 /* Small pop-in for interactive icons/badges */
 @keyframes pop-in {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
-.animate-pop-in { animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-pop-in {
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 
 @keyframes flame-flicker {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  25% { transform: scale(1.04) rotate(-1.5deg); opacity: 0.95; }
-  50% { transform: scale(0.98) rotate(1deg); opacity: 1; }
-  75% { transform: scale(1.03) rotate(-0.5deg); opacity: 0.97; }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.04) rotate(-1.5deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(0.98) rotate(1deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.03) rotate(-0.5deg);
+    opacity: 0.97;
+  }
 }
-.animate-flame-flicker { animation: flame-flicker 2.6s ease-in-out infinite; }
+.animate-flame-flicker {
+  animation: flame-flicker 2.6s ease-in-out infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .bar-anim-1, .bar-anim-2, .bar-anim-3, .bar-anim-4 { animation: none; transform: scaleY(1); opacity: 1; }
-  .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; transition: none; }
-  .animate-float, .animate-float-sm, .animate-drift-1, .animate-drift-2, .animate-pop-in, .animate-flame-flicker { animation: none; }
-  .nav-link::after { transition: none; }
-  .glass-card:hover::after { animation: none; opacity: 0; }
+  html {
+    scroll-behavior: auto;
+  }
+  .bar-anim-1,
+  .bar-anim-2,
+  .bar-anim-3,
+  .bar-anim-4 {
+    animation: none;
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float,
+  .animate-float-sm,
+  .animate-drift-1,
+  .animate-drift-2,
+  .animate-pop-in,
+  .animate-flame-flicker {
+    animation: none;
+  }
+  .nav-link::after {
+    transition: none;
+  }
+  .glass-card:hover::after {
+    animation: none;
+    opacity: 0;
+  }
 }

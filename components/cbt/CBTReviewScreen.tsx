@@ -24,14 +24,16 @@ export default function CBTReviewScreen({
   result: ExamResult;
   onRetake: () => void;
 }) {
-  const accuracy = result.total ? Math.round((result.correct / result.total) * 100) : 0;
+  const accuracy = result.total
+    ? Math.round((result.correct / result.total) * 100)
+    : 0;
 
   const recommendation =
     accuracy >= 80
-      ? "Strong performance — you're ready for tougher timed sets in this subject."
+      ? "Strong performance - you're ready for tougher timed sets in this subject."
       : accuracy >= 50
         ? "Solid attempt. Revisit the topics behind your wrong answers before the next mock."
-        : "Let's slow down and rebuild the fundamentals here before the next attempt — that's how mastery sticks.";
+        : "Let's slow down and rebuild the fundamentals here before the next attempt - that's how mastery sticks.";
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
@@ -39,8 +41,12 @@ export default function CBTReviewScreen({
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-signal-soft text-signal-deep">
           <Icon name="exam" className="h-7 w-7" />
         </div>
-        <h2 className="mt-4 font-display text-xl font-semibold text-ink">{title} — Results</h2>
-        <p className="mt-1 text-sm text-ink-soft">Score: {result.correct}/{result.total}</p>
+        <h2 className="mt-4 font-display text-xl font-semibold text-ink">
+          {title} - Results
+        </h2>
+        <p className="mt-1 text-sm text-ink-soft">
+          Score: {result.correct}/{result.total}
+        </p>
 
         <div className="mx-auto mt-5 max-w-xs">
           <div className="flex items-center justify-between text-xs text-ink-faint">
@@ -48,7 +54,10 @@ export default function CBTReviewScreen({
             <span>{accuracy}%</span>
           </div>
           <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-ink/10">
-            <div className="h-full rounded-full bg-signal transition-all duration-700" style={{ width: `${accuracy}%` }} />
+            <div
+              className="h-full rounded-full bg-signal transition-all duration-700"
+              style={{ width: `${accuracy}%` }}
+            />
           </div>
         </div>
       </div>
@@ -57,7 +66,11 @@ export default function CBTReviewScreen({
         <Stat label="Correct" value={result.correct} tone="moss" />
         <Stat label="Wrong" value={result.wrong} tone="ember" />
         <Stat label="Skipped" value={result.skipped} tone="signal" />
-        <Stat label="Time taken" value={formatTime(result.timeTakenSeconds)} tone="signal" />
+        <Stat
+          label="Time taken"
+          value={formatTime(result.timeTakenSeconds)}
+          tone="signal"
+        />
       </div>
 
       <div className="glass-card-deep rounded-3xl p-6">
@@ -65,7 +78,9 @@ export default function CBTReviewScreen({
           <Icon name="sparkle" className="h-3.5 w-3.5 text-signal" />
           Performance summary
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-white/90">{recommendation}</p>
+        <p className="mt-3 text-sm leading-relaxed text-white/90">
+          {recommendation}
+        </p>
       </div>
 
       <div className="flex gap-3">
@@ -86,12 +101,29 @@ export default function CBTReviewScreen({
   );
 }
 
-function Stat({ label, value, tone }: { label: string; value: string | number; tone: "moss" | "ember" | "signal" }) {
-  const toneClass = tone === "moss" ? "text-moss" : tone === "ember" ? "text-ember" : "text-signal-deep";
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string | number;
+  tone: "moss" | "ember" | "signal";
+}) {
+  const toneClass =
+    tone === "moss"
+      ? "text-moss"
+      : tone === "ember"
+        ? "text-ember"
+        : "text-signal-deep";
   return (
     <div className="glass-card rounded-2xl p-4 text-center">
-      <div className={`font-display text-xl font-semibold ${toneClass}`}>{value}</div>
-      <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-ink-faint">{label}</div>
+      <div className={`font-display text-xl font-semibold ${toneClass}`}>
+        {value}
+      </div>
+      <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-ink-faint">
+        {label}
+      </div>
     </div>
   );
 }

@@ -35,14 +35,18 @@ export default async function ComingSoonPage({
         {title} is on its way
       </h1>
       <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-soft">
-        We&apos;re still building this part of Page.AI so it meets the same bar as the rest of the
-        app — patient, personal, and built for zero connection. Here&apos;s what to expect.
+        We&apos;re still building this part of Page.AI so it meets the same bar
+        as the rest of the app - patient, personal, and built for zero
+        connection. Here&apos;s what to expect.
       </p>
 
       <div className="glass-card mt-8 w-full rounded-3xl p-6 text-left">
         <ul className="flex flex-col gap-3.5">
           {roadmap.map((line) => (
-            <li key={line} className="flex items-start gap-3 text-sm text-ink-soft">
+            <li
+              key={line}
+              className="flex items-start gap-3 text-sm text-ink-soft"
+            >
               <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-moss-soft text-moss">
                 <Icon name="target" className="h-3 w-3" strokeWidth={2} />
               </span>

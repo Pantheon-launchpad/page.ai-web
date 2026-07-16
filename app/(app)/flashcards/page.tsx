@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import FlashcardsClient from "@/components/learn/FlashcardsClient";
 
-export const metadata: Metadata = { title: "Flashcards — Page.AI" };
+export const metadata: Metadata = { title: "Flashcards - Page.AI" };
 
 export default function FlashcardsPage() {
   return (

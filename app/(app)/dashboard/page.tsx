@@ -8,7 +8,7 @@ import UpcomingRevision from "@/components/dashboard/UpcomingRevision";
 import QuickActions from "@/components/dashboard/QuickActions";
 
 export const metadata: Metadata = {
-  title: "Dashboard — Page.AI",
+  title: "Dashboard - Page.AI",
 };
 
 export default function DashboardPage() {

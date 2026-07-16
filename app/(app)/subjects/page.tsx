@@ -3,11 +3,13 @@ import PageHeader from "@/components/learn/PageHeader";
 import SubjectCard from "@/components/learn/SubjectCard";
 import { subjects } from "@/lib/learn-data";
 
-export const metadata: Metadata = { title: "Subjects — Page.AI" };
+export const metadata: Metadata = { title: "Subjects - Page.AI" };
 
 export default function SubjectsPage() {
   const overallHours = subjects.reduce((sum, s) => sum + s.hoursSpent, 0);
-  const overallMastery = Math.round(subjects.reduce((sum, s) => sum + s.mastery, 0) / subjects.length);
+  const overallMastery = Math.round(
+    subjects.reduce((sum, s) => sum + s.mastery, 0) / subjects.length,
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -19,12 +21,20 @@ export default function SubjectsPage() {
       >
         <div className="flex gap-2.5">
           <div className="glass-card rounded-2xl px-4 py-2.5 text-center">
-            <div className="font-display text-lg font-semibold text-ink">{overallMastery}%</div>
-            <div className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">Avg mastery</div>
+            <div className="font-display text-lg font-semibold text-ink">
+              {overallMastery}%
+            </div>
+            <div className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
+              Avg mastery
+            </div>
           </div>
           <div className="glass-card rounded-2xl px-4 py-2.5 text-center">
-            <div className="font-display text-lg font-semibold text-ink">{overallHours}h</div>
-            <div className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">Time spent</div>
+            <div className="font-display text-lg font-semibold text-ink">
+              {overallHours}h
+            </div>
+            <div className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
+              Time spent
+            </div>
           </div>
         </div>
       </PageHeader>

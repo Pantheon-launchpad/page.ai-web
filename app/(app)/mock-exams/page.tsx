@@ -3,7 +3,7 @@ import PageHeader from "@/components/learn/PageHeader";
 import ExamPicker from "@/components/cbt/ExamPicker";
 import { mockExams } from "@/lib/practice-data";
 
-export const metadata: Metadata = { title: "Mock Exams — Page.AI" };
+export const metadata: Metadata = { title: "Mock Exams - Page.AI" };
 
 export default function MockExamsPage() {
   return (
@@ -12,7 +12,7 @@ export default function MockExamsPage() {
         eyebrow="Practice"
         icon="mockExam"
         title="Mock exams"
-        description="Longer, full-length simulations — the same engine as CBT Exams, scaled up to exam-day length."
+        description="Longer, full-length simulations - the same engine as CBT Exams, scaled up to exam-day length."
       />
       <ExamPicker exams={mockExams} />
     </div>
