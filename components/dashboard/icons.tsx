@@ -1,0 +1,99 @@
+export type IconName =
+  | "home"
+  | "book"
+  | "library"
+  | "tutor"
+  | "chat"
+  | "flashcard"
+  | "planner"
+  | "target"
+  | "exam"
+  | "mockExam"
+  | "mistake"
+  | "chart"
+  | "weak"
+  | "trophy"
+  | "flame"
+  | "history"
+  | "lumo"
+  | "wand"
+  | "gift"
+  | "users"
+  | "leaderboard"
+  | "classroom"
+  | "profile"
+  | "download"
+  | "crown"
+  | "settings"
+  | "help"
+  | "arrowRight"
+  | "play"
+  | "clock"
+  | "bolt"
+  | "sparkle"
+  | "signal"
+  | "mic"
+  | "debate";
+
+const paths: Record<IconName, string> = {
+  home: "M4 11.5 12 4l8 7.5M6 9.5V20h5v-5.5h2V20h5V9.5",
+  book: "M5 4.5A1.5 1.5 0 0 1 6.5 3H19v16.5a1 1 0 0 1-1 1H6.5A1.5 1.5 0 0 1 5 19V4.5ZM8 3v17",
+  library: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z",
+  tutor: "M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 1 1-4.05-7.5L21 3l-1 4.5A8.96 8.96 0 0 1 21 12Z",
+  chat: "M4 4h16v12H8l-4 4V4Z",
+  flashcard: "M4 7a2 2 0 0 1 2-2h9l5 5v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7ZM15 5v5h5",
+  planner: "M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5ZM4 10h16M8 3v4M16 3v4",
+  target: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z",
+  exam: "M9 12.75 11.25 15 15 9.75M5 4.5A1.5 1.5 0 0 1 6.5 3H19v16.5a1 1 0 0 1-1 1H6.5A1.5 1.5 0 0 1 5 19V4.5Z",
+  mockExam: "M4 6.5A1.5 1.5 0 0 1 5.5 5H16l4 4v9a1 1 0 0 1-1 1H5.5A1.5 1.5 0 0 1 4 17.5V6.5ZM16 5v4h4M9 13h6M9 16h4",
+  mistake: "M12 3 2 20h20L12 3ZM12 10v4M12 17h.01",
+  chart: "M4 20V10M10 20V4M16 20v-7M22 20H2",
+  weak: "M12 9v4M12 16.5h.01M10.3 3.9 2.7 17a2 2 0 0 0 1.75 3h15.1a2 2 0 0 0 1.75-3L13.7 3.9a2 2 0 0 0-3.4 0Z",
+  trophy: "M8 4h8v4a4 4 0 0 1-8 0V4ZM8 5H5a3 3 0 0 0 3 5M16 5h3a3 3 0 0 1-3 5M10 15v2a2 2 0 0 1-2 2H7v2h10v-2h-1a2 2 0 0 1-2-2v-2",
+  flame: "M12 2c2 3 5 6 5 10a5 5 0 0 1-10 0c0-1.4.6-2.6 1.3-3.7C9 10 9.5 11 10.5 11c1 0 1-1.2.5-2.3C10.2 6.9 10 4.4 12 2Z",
+  history: "M4 12a8 8 0 1 0 2.5-5.8M4 4v5h5M12 8v4l3 2",
+  lumo: "M12 3C8 3 5 6 5 9.8c0 2.4 1.3 4.3 3 5.6V18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.6c1.7-1.3 3-3.2 3-5.6C19 6 16 3 12 3ZM9.5 21h5",
+  wand: "M4 20 15 9M17 3l1 2 2 1-2 1-1 2-1-2-2-1 2-1ZM6 15l.7 1.3L8 17l-1.3.7L6 19l-.7-1.3L4 17l1.3-.7Z",
+  gift: "M4 9h16v11H4V9ZM2 6h20v3H2V6ZM12 6v14M12 6C10.5 6 8 5.2 8 3.3 8 2 9 1.5 10 2c1.2.6 2 2.2 2 4ZM12 6c1.5 0 4-.8 4-2.7 0-1.3-1-1.8-2-1.3-1.2.6-2 2.2-2 4Z",
+  users: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 21c0-3.3 2.7-6 6-6s6 2.7 6 6M17 11a3 3 0 1 0 0-6M15 21c0-2.6-.9-4.8-2.5-6.2M21 21c0-2.8-1.8-5.1-4-5.8",
+  leaderboard: "M5 20V11M12 20V4M19 20v-7",
+  classroom: "M3 5h18v11H3V5ZM8 21h8M12 16v5",
+  profile: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21c1.3-3.8 4.4-6 8-6s6.7 2.2 8 6",
+  download: "M12 3v12m0 0-4-4m4 4 4-4M5 21h14",
+  crown: "M4 9l3.5 3L12 6l4.5 6L20 9l-1.5 9h-13L4 9ZM6.5 21h11",
+  settings: "M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H10a1.7 1.7 0 0 0 1-1.6V4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9V10a1.7 1.7 0 0 0 1.6 1H20a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z",
+  help: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM9.5 9a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 1.9-2.4 3.4M12 17h.01",
+  arrowRight: "M5 12h14M13 6l6 6-6 6",
+  play: "M7 5v14l12-7L7 5Z",
+  clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7v5l3.5 2",
+  bolt: "M13 2 3 14h7l-1 8 10-12h-7l1-8Z",
+  sparkle: "M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6L12 3ZM19 15l.6 2 2 .6-2 .6-.6 2-.6-2-2-.6 2-.6.6-2Z",
+  signal: "M4 20V14M10 20V9M16 20v-9M22 20V4",
+  mic: "M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3ZM6 11a6 6 0 0 0 12 0M12 19v3",
+  debate: "M8 10h.01M12 10h.01M16 10h.01M4 4h11v9H8l-4 4V4ZM20 9v11l-4-4h-3V9h7Z",
+};
+
+export function Icon({
+  name,
+  className = "",
+  strokeWidth = 1.7,
+}: {
+  name: IconName;
+  className?: string;
+  strokeWidth?: number;
+}) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d={paths[name]} />
+    </svg>
+  );
+}
