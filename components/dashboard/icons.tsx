@@ -49,7 +49,14 @@ export type IconName =
   | "shuffle"
   | "refresh"
   | "layers"
-  | "story";
+  | "story"
+  | "calculator"
+  | "flag"
+  | "grid"
+  | "lightbulb"
+  | "link"
+  | "close"
+  | "dice";
 
 const paths: Record<IconName, string> = {
   home: "M4 11.5 12 4l8 7.5M6 9.5V20h5v-5.5h2V20h5V9.5",
@@ -103,6 +110,13 @@ const paths: Record<IconName, string> = {
   refresh: "M4 12a8 8 0 0 1 13.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.7L4 16M4 20v-4h4",
   layers: "M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5",
   story: "M5 4h11l3 3v13H5V4ZM8 9h8M8 13h8M8 17h5",
+  calculator: "M6 3h12v18H6V3ZM8 6.5h8M8 10h1.5M11.75 10h1.5M15.5 10H17M8 13h1.5M11.75 13h1.5M15.5 13H17M8 16h1.5M11.75 16h1.5M15.5 16H17",
+  flag: "M6 3v18M6 4h11l-2.5 4L17 12H6",
+  grid: "M4 4h6v6H4V4ZM14 4h6v6h-6V4ZM4 14h6v6H4v-6ZM14 14h6v6h-6v-6Z",
+  lightbulb: "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9v.2h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3Z",
+  link: "M9.5 14.5 14.5 9.5M8 17 5.5 19.5a3 3 0 0 1-4.2-4.2L4 12.8M16 7l2.5-2.5a3 3 0 0 1 4.2 4.2L20 11.2",
+  close: "M6 6l12 12M18 6 6 18",
+  dice: "M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM8 8h.01M16 8h.01M8 16h.01M16 16h.01M12 12h.01",
 };
 
 export function Icon({
