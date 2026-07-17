@@ -69,15 +69,15 @@ export function useTheme() {
 
 // Runs synchronously before paint via a blocking <script> in the root layout,
 // so the correct theme is applied immediately and there's no flash of the
-// wrong theme on load. "soft" is never chosen automatically - it's an
-// explicit, opt-in low-glare mode for people sensitive to bright light who
-// also can't tolerate a fully dark UI, so it only appears once someone picks
-// it themselves.
+// wrong theme on load. New visitors default to light mode. "soft" is never
+// chosen automatically - it's an explicit, opt-in low-glare mode for people
+// sensitive to bright light who also can't tolerate a fully dark UI, so it
+// only appears once someone picks it themselves.
 export const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem('${STORAGE_KEY}');
-    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = stored || 'light';
     if (theme === 'dark' || theme === 'soft') document.documentElement.classList.add(theme);
   } catch (e) {}
 })();
