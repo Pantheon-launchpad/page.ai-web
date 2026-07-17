@@ -11,7 +11,7 @@ import MissionsCard from "@/components/rewards/MissionsCard";
 import { dailyMissions } from "@/lib/rewards-data";
 
 export const metadata: Metadata = {
-  title: "Dashboard — Page.AI",
+  title: "Dashboard - Page.AI",
 };
 
 export default function DashboardPage() {

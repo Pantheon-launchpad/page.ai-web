@@ -11,7 +11,7 @@ export const heatmap: number[][] = Array.from({ length: 12 }, (_, w) =>
     if (seed < 6) return 2;
     if (seed < 8) return 3;
     return 4;
-  })
+  }),
 );
 
 export const analyticsSummary = {
@@ -52,13 +52,13 @@ export const weakAreas = [
     subject: "Biology",
     topic: "Genetics",
     mastery: 47,
-    note: "Punnett square ratios are the recurring miss — especially homozygous counts.",
+    note: "Punnett square ratios are the recurring miss - especially homozygous counts.",
   },
   {
     subject: "Geography",
     topic: "Climate Zones",
     mastery: 38,
-    note: "Barely started — this topic is dragging your Geography average down.",
+    note: "Barely started - this topic is dragging your Geography average down.",
   },
   {
     subject: "Mathematics",
@@ -74,21 +74,88 @@ export type Achievement = {
   id: string;
   title: string;
   description: string;
-  icon: "flame" | "trophy" | "star" | "target" | "book" | "bolt" | "sparkle" | "crown";
+  icon:
+    | "flame"
+    | "trophy"
+    | "star"
+    | "target"
+    | "book"
+    | "bolt"
+    | "sparkle"
+    | "crown";
   earned: boolean;
   progress?: number;
 };
 
 export const achievements: Achievement[] = [
-  { id: "a1", title: "First Steps", description: "Complete your first practice session", icon: "target", earned: true },
-  { id: "a2", title: "Week One", description: "Maintain a 7-day streak", icon: "flame", earned: true },
-  { id: "a3", title: "Bookworm", description: "Read 10 resources from the library", icon: "book", earned: true },
-  { id: "a4", title: "Sharp Shooter", description: "Score 100% on a practice session", icon: "star", earned: true },
-  { id: "a5", title: "Night Owl", description: "Study after 10pm five times", icon: "sparkle", earned: false, progress: 60 },
-  { id: "a6", title: "Marathoner", description: "Maintain a 30-day streak", icon: "flame", earned: false, progress: 30 },
-  { id: "a7", title: "CBT Champion", description: "Score 90%+ on a full mock exam", icon: "trophy", earned: false, progress: 45 },
-  { id: "a8", title: "Levelled Up", description: "Reach Level 20", icon: "crown", earned: false, progress: 60 },
-  { id: "a9", title: "Lightning Fast", description: "Answer 20 questions in under 5 minutes", icon: "bolt", earned: false, progress: 80 },
+  {
+    id: "a1",
+    title: "First Steps",
+    description: "Complete your first practice session",
+    icon: "target",
+    earned: true,
+  },
+  {
+    id: "a2",
+    title: "Week One",
+    description: "Maintain a 7-day streak",
+    icon: "flame",
+    earned: true,
+  },
+  {
+    id: "a3",
+    title: "Bookworm",
+    description: "Read 10 resources from the library",
+    icon: "book",
+    earned: true,
+  },
+  {
+    id: "a4",
+    title: "Sharp Shooter",
+    description: "Score 100% on a practice session",
+    icon: "star",
+    earned: true,
+  },
+  {
+    id: "a5",
+    title: "Night Owl",
+    description: "Study after 10pm five times",
+    icon: "sparkle",
+    earned: false,
+    progress: 60,
+  },
+  {
+    id: "a6",
+    title: "Marathoner",
+    description: "Maintain a 30-day streak",
+    icon: "flame",
+    earned: false,
+    progress: 30,
+  },
+  {
+    id: "a7",
+    title: "CBT Champion",
+    description: "Score 90%+ on a full mock exam",
+    icon: "trophy",
+    earned: false,
+    progress: 45,
+  },
+  {
+    id: "a8",
+    title: "Levelled Up",
+    description: "Reach Level 20",
+    icon: "crown",
+    earned: false,
+    progress: 60,
+  },
+  {
+    id: "a9",
+    title: "Lightning Fast",
+    description: "Answer 20 questions in under 5 minutes",
+    icon: "bolt",
+    earned: false,
+    progress: 80,
+  },
 ];
 
 // --- Streaks --------------------------------------------------------------
@@ -111,11 +178,60 @@ export const streakStats = {
 // --- Learning history -----------------------------------------------------
 
 export const learningHistory = [
-  { id: "h1", group: "Today", label: "Completed Physics practice — 5 questions", meta: "80% accuracy", icon: "target" as const, time: "2:40 PM" },
-  { id: "h2", group: "Today", label: "Reviewed Waves & Optics flashcards", meta: "12 cards", icon: "flashcard" as const, time: "11:15 AM" },
-  { id: "h3", group: "Yesterday", label: "Completed WAEC Chemistry CBT mock", icon: "exam" as const, meta: "68% score", time: "6:05 PM" },
-  { id: "h4", group: "Yesterday", label: "Chatted with Physics textbook about Waves", icon: "chat" as const, meta: "18 messages", time: "4:30 PM" },
-  { id: "h5", group: "This week", label: "Completed Biology practice — 8 questions", icon: "target" as const, meta: "88% accuracy", time: "Mon" },
-  { id: "h6", group: "This week", label: "Unlocked achievement: Sharp Shooter", icon: "star" as const, meta: "100% score", time: "Mon" },
-  { id: "h7", group: "Earlier", label: "Started Geography — Climate Zones", icon: "book" as const, meta: "New topic", time: "3 Jul" },
+  {
+    id: "h1",
+    group: "Today",
+    label: "Completed Physics practice - 5 questions",
+    meta: "80% accuracy",
+    icon: "target" as const,
+    time: "2:40 PM",
+  },
+  {
+    id: "h2",
+    group: "Today",
+    label: "Reviewed Waves & Optics flashcards",
+    meta: "12 cards",
+    icon: "flashcard" as const,
+    time: "11:15 AM",
+  },
+  {
+    id: "h3",
+    group: "Yesterday",
+    label: "Completed WAEC Chemistry CBT mock",
+    icon: "exam" as const,
+    meta: "68% score",
+    time: "6:05 PM",
+  },
+  {
+    id: "h4",
+    group: "Yesterday",
+    label: "Chatted with Physics textbook about Waves",
+    icon: "chat" as const,
+    meta: "18 messages",
+    time: "4:30 PM",
+  },
+  {
+    id: "h5",
+    group: "This week",
+    label: "Completed Biology practice - 8 questions",
+    icon: "target" as const,
+    meta: "88% accuracy",
+    time: "Mon",
+  },
+  {
+    id: "h6",
+    group: "This week",
+    label: "Unlocked achievement: Sharp Shooter",
+    icon: "star" as const,
+    meta: "100% score",
+    time: "Mon",
+  },
+  {
+    id: "h7",
+    group: "Earlier",
+    label: "Started Geography - Climate Zones",
+    icon: "book" as const,
+    meta: "New topic",
+    time: "3 Jul",
+  },
 ];
