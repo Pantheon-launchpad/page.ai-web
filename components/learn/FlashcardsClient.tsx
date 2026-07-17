@@ -28,7 +28,7 @@ export default function FlashcardsClient() {
                   {deck.dueToday} due
                 </span>
               ) : (
-                <span className="rounded-full bg-cta/5 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide text-ink-faint">
+                <span className="rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide text-ink-faint">
                   Up to date
                 </span>
               )}

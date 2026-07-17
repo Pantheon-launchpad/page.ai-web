@@ -224,7 +224,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
       )}
 
       {confirmSubmit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-cta/40 px-6 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-6 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm rounded-3xl p-6 text-center">
             <h3 className="font-display text-lg font-semibold text-ink">Submit this exam?</h3>
             <p className="mt-2 text-sm text-ink-soft">

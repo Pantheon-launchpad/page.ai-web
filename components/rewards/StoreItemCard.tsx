@@ -18,7 +18,7 @@ export default function StoreItemCard({ item, balance }: { item: StoreItem; bala
           {item.cost.toLocaleString()}
         </span>
         {item.comingSoon ? (
-          <span className="rounded-full bg-cta/5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-ink-faint">Soon</span>
+          <span className="rounded-full bg-ink/5 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-ink-faint">Soon</span>
         ) : (
           <button
             disabled={!affordable}

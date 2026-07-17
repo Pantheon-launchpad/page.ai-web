@@ -90,31 +90,39 @@
    impairment, migraine triggers). Muted rather than dark: lower luminance,
    softer contrast, desaturated accents, gentler shadows. Still light-mode
    for native form controls (color-scheme: light). */
+/* Soft / low-glare - a dimmer light theme for people who find bright
+   white/cream surfaces and vivid saturated colors uncomfortable, but still
+   need a fully legible UI (not a hazy or low-contrast one). The goal here is
+   specifically NOT to reduce contrast or definition - text stays dark and
+   easy to read, cards keep clear edges - it only lowers the raw brightness
+   of large surfaces and takes the saturation down on the accent colors,
+   which is usually what actually causes glare/discomfort, not darkness or
+   contrast itself. Still light-mode for native form controls. */
 .soft {
   color-scheme: light;
 
-  --color-paper: #e7e2d5;
-  --color-paper-deep: #ddd5c1;
-  --color-line: #cec5b0;
-  --color-ink: #454b58;
-  --color-ink-soft: #6b7080;
-  --color-ink-faint: #93949e;
-  --color-signal: #6785c9;
-  --color-signal-deep: #4d668f;
-  --color-signal-soft: #dce2ee;
-  --color-ember: #a97854;
-  --color-ember-soft: #e8dccb;
-  --color-moss: #6b8571;
-  --color-moss-soft: #e0e4db;
+  --color-paper: #efe8d9;
+  --color-paper-deep: #e4d9bf;
+  --color-line: #d8caab;
+  --color-ink: #232b3d;
+  --color-ink-soft: #4e5568;
+  --color-ink-faint: #80839a;
+  --color-signal: #4a6cc8;
+  --color-signal-deep: #32478e;
+  --color-signal-soft: #dbe3f4;
+  --color-ember: #a15f36;
+  --color-ember-soft: #ecdbc7;
+  --color-moss: #4c6b50;
+  --color-moss-soft: #dbe6da;
 
-  --color-surface-1: rgba(255, 255, 255, 0.38);
-  --color-surface-2: rgba(255, 255, 255, 0.22);
-  --color-surface-hover: rgba(255, 255, 255, 0.55);
+  --color-surface-1: rgba(255, 255, 255, 0.55);
+  --color-surface-2: rgba(255, 255, 255, 0.34);
+  --color-surface-hover: rgba(255, 255, 255, 0.78);
 
   --shadow-glass:
-    0 1px 1px rgba(69, 75, 88, 0.03), 0 12px 28px -18px rgba(69, 75, 88, 0.14);
+    0 1px 1px rgba(35, 43, 61, 0.04), 0 12px 32px -16px rgba(35, 43, 61, 0.16);
   --shadow-lift:
-    0 1px 1px rgba(69, 75, 88, 0.04), 0 20px 40px -20px rgba(69, 75, 88, 0.2);
+    0 1px 1px rgba(35, 43, 61, 0.05), 0 24px 48px -20px rgba(35, 43, 61, 0.24);
 }
 
 /* A handful of marketing sections (Footer, the phone mockup) are art-directed
@@ -194,13 +202,6 @@ body {
     transparent 0.6px
   );
 }
-.soft .paper-grain::before {
-  opacity: 0.35;
-  background-image: radial-gradient(
-    rgba(69, 75, 88, 0.045) 0.6px,
-    transparent 0.6px
-  );
-}
 
 /* Real glass: a bright top-left sheen, a darker bottom-right falloff, an inner
    rim light on the top edge, and enough saturation lift that whatever sits
@@ -269,28 +270,6 @@ body {
   );
 }
 
-.soft .glass-card {
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.1) 55%,
-    rgba(255, 255, 255, 0.16) 100%
-  );
-  border-color: rgba(255, 255, 255, 0.32);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 0 0 1px rgba(69, 75, 88, 0.04),
-    var(--shadow-glass);
-}
-.soft .glass-card::after {
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.3) 40%,
-    transparent 60%
-  );
-}
-
 .glass-card-deep {
   position: relative;
   background: linear-gradient(
@@ -312,17 +291,6 @@ body {
     rgba(3, 5, 12, 0.92) 100%
   );
   border-color: rgba(255, 255, 255, 0.1);
-}
-.soft .glass-card-deep {
-  background: linear-gradient(
-    155deg,
-    rgba(58, 66, 84, 0.95) 0%,
-    rgba(41, 47, 61, 0.92) 100%
-  );
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    var(--shadow-lift);
 }
 
 @keyframes shine-sweep {

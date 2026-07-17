@@ -266,7 +266,7 @@ export default function PracticeFlowClient() {
             {percent}% accuracy this session
           </p>
 
-          <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-cta/10">
+          <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
             <div
               className="h-full rounded-full bg-signal transition-all duration-700"
               style={{ width: `${percent}%` }}

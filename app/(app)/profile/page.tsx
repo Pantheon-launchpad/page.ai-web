@@ -102,7 +102,7 @@ function TabButton({
     <button
       onClick={onClick}
       className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-        active ? "bg-signal text-white" : "text-ink-soft hover:bg-cta/5 hover:text-ink"
+        active ? "bg-signal text-white" : "text-ink-soft hover:bg-ink/5 hover:text-ink"
       }`}
     >
       <Icon name={icon} className="h-4 w-4" />

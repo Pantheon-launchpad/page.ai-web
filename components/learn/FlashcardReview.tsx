@@ -59,7 +59,7 @@ export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck;
         </span>
       </div>
 
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-cta/10">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
         <div
           className={`h-full rounded-full ${c.bar} transition-all duration-500`}
           style={{ width: `${(reviewed / deck.cards.length) * 100}%` }}

@@ -5,7 +5,7 @@ import { useTheme, type Theme } from "./ThemeProvider";
 
 const options: { value: Theme; icon: IconName; label: string }[] = [
   { value: "light", icon: "sun", label: "Light" },
-  { value: "soft", icon: "cloud", label: "Soft - low glare" },
+  { value: "soft", icon: "cloud", label: "Soft - easy on the eyes" },
   { value: "dark", icon: "moon", label: "Dark" },
 ];
 

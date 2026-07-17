@@ -168,11 +168,13 @@ export default function PhoneMockup() {
 
       {/* floating "no signal, still working" chip - the signature idea made literal.
           Positioned inside the padded wrapper so it never overflows the viewport. */}
-      <div className="glass-card animate-float-sm absolute right-1 top-24 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 sm:right-0">
-        <SignalMark animated />
-        <span className="font-mono text-[10px] uppercase tracking-wide text-ink-soft">
-          Full lessons, 0 bars
-        </span>
+      <div className="absolute right-1 top-24 sm:right-0">
+        <div className="glass-card animate-float-sm flex items-center gap-2 rounded-2xl px-3.5 py-2.5">
+          <SignalMark animated />
+          <span className="font-mono text-[10px] uppercase tracking-wide text-ink-soft">
+            Full lessons, 0 bars
+          </span>
+        </div>
       </div>
     </div>
   );

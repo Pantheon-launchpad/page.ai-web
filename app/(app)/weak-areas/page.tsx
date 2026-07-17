@@ -39,7 +39,7 @@ export default function WeakAreasPage() {
 
             <div className="flex shrink-0 items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-24 overflow-hidden rounded-full bg-cta/10">
+                <div className="h-1.5 w-24 overflow-hidden rounded-full bg-ink/10">
                   <div
                     className="h-full rounded-full bg-ember"
                     style={{ width: `${area.mastery}%` }}

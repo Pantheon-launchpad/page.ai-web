@@ -19,7 +19,8 @@ export default function ProfileMenu() {
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
     }
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
@@ -36,38 +37,51 @@ export default function ProfileMenu() {
         {student.initials}
       </button>
 
+      {/* Positioning lives on this outer wrapper, deliberately kept separate
+          from the `glass-card` class below - `.glass-card` sets its own
+          `position: relative` in plain (unlayered) CSS, which in a CSS
+          Cascade Layers world beats a layered Tailwind utility like
+          `absolute` no matter what order the classes are written in. Nesting
+          avoids that fight entirely instead of fighting it with !important. */}
       {open && (
-        <div className="glass-card absolute right-0 top-12 z-40 w-56 rounded-2xl p-2">
-          <div className="border-b border-ink/10 px-3 py-2.5">
-            <p className="truncate text-sm font-semibold text-ink">{student.name}</p>
-            <p className="text-xs text-ink-soft">Level {student.level} &middot; {student.coins.toLocaleString()} coins</p>
-          </div>
+        <div className="absolute right-0 top-12 z-40 w-56">
+          <div className="glass-card animate-pop-in rounded-2xl p-2">
+            <div className="border-b border-ink/10 px-3 py-2.5">
+              <p className="truncate text-sm font-semibold text-ink">
+                {student.name}
+              </p>
+              <p className="text-xs text-ink-soft">
+                Level {student.level} &middot; {student.coins.toLocaleString()}{" "}
+                coins
+              </p>
+            </div>
 
-          <div className="flex flex-col py-1.5">
-            {items.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-ink-soft transition-colors hover:bg-cta/5 hover:text-ink"
+            <div className="flex flex-col py-1.5">
+              {items.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
+                >
+                  <Icon name={item.icon} className="h-4 w-4" />
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="border-t border-ink/10 pt-1.5">
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  router.push("/login");
+                }}
+                className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-ember transition-colors hover:bg-ember-soft"
               >
-                <Icon name={item.icon} className="h-4 w-4" />
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="border-t border-ink/10 pt-1.5">
-            <button
-              onClick={() => {
-                setOpen(false);
-                router.push("/login");
-              }}
-              className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-ember transition-colors hover:bg-ember-soft"
-            >
-              <Icon name="close" className="h-4 w-4" />
-              Log out
-            </button>
+                <Icon name="close" className="h-4 w-4" />
+                Log out
+              </button>
+            </div>
           </div>
         </div>
       )}
