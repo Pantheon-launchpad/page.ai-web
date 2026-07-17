@@ -33,7 +33,7 @@ function StatCard({
 
 export default function StatsRow() {
   const goalPercent = Math.min(100, Math.round((student.studyMinutesToday / student.studyGoalMinutes) * 100));
-  const levelPercent = Math.round((student.xpIntoLevel / student.xpForNextLevel) * 100);
+  const levelPercent = Math.round((student.coinsIntoLevel / student.coinsForNextLevel) * 100);
 
   return (
     <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-5">
@@ -57,11 +57,11 @@ export default function StatsRow() {
       </div>
 
       <StatCard
-        icon="bolt"
-        iconClass="bg-signal-soft text-signal-deep"
-        label="Current XP"
-        value={student.xp.toLocaleString()}
-        sub={`${student.xpIntoLevel}/${student.xpForNextLevel} to next level`}
+        icon="coin"
+        iconClass="bg-ember-soft text-ember"
+        label="Page coins"
+        value={student.coins.toLocaleString()}
+        sub={`${student.coinsIntoLevel}/${student.coinsForNextLevel} to next level`}
       />
 
       <StatCard

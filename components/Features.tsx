@@ -21,7 +21,7 @@ const features = [
   {
     icon: "M12 2c2 3 5 6 5 10a5 5 0 0 1-10 0c0-1.4.6-2.6 1.3-3.7C9 10 9.5 11 10.5 11c1 0 1-1.2.5-2.3C10.2 6.9 10 4.4 12 2Z",
     title: "Streaks & goals",
-    body: "Daily streaks, XP, and weekly goals keep motivation high. Progress syncs next time you're online.",
+    body: "Daily streaks, Page Coins, and weekly goals keep motivation high. Progress syncs next time you're online.",
   },
   {
     icon: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z",

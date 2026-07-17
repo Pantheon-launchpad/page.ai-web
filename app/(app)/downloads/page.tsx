@@ -44,7 +44,7 @@ export default function DownloadsPage() {
             {items.map((item) => (
               <li key={item.id} className="flex items-center gap-3.5 p-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-signal-soft text-signal-deep">
-                  <Icon name={item.type === "Model" ? "sparkle" : item.type === "Subject" ? "book" : "pdf"} className="h-4.5 w-4.5" />
+                  <Icon name={item.type === "Model" ? "sparkle" : item.type === "Subject" ? "book" : "pdf"} className="h-[18px] w-[18px]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-ink">{item.name}</p>
@@ -54,7 +54,7 @@ export default function DownloadsPage() {
                 </div>
                 <button
                   onClick={() => remove(item.id)}
-                  className="shrink-0 rounded-full border border-ink/10 bg-white/50 px-3.5 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-ember/40 hover:text-ember"
+                  className="shrink-0 rounded-full border border-ink/10 bg-surface-1 px-3.5 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-ember/40 hover:text-ember"
                 >
                   Remove
                 </button>

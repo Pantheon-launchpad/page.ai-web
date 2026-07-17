@@ -71,7 +71,7 @@ export default function SettingsPage() {
           control={
             <button
               onClick={() => router.push("/login")}
-              className="rounded-full border border-ink/10 bg-white/50 px-4 py-2 text-sm font-medium text-ink hover:border-ink/20"
+              className="rounded-full border border-ink/10 bg-surface-1 px-4 py-2 text-sm font-medium text-ink hover:border-ink/20"
             >
               Log out
             </button>
@@ -104,7 +104,7 @@ export default function SettingsPage() {
             <div className="mt-5 flex gap-3">
               <button
                 onClick={() => setConfirmDelete(false)}
-                className="flex-1 rounded-full border border-ink/10 bg-white/50 py-2.5 text-sm font-medium text-ink"
+                className="flex-1 rounded-full border border-ink/10 bg-surface-1 py-2.5 text-sm font-medium text-ink"
               >
                 Cancel
               </button>

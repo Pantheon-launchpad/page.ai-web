@@ -34,7 +34,7 @@ export default function PremiumPage() {
 
           <button
             disabled
-            className="mt-6 w-full rounded-full border border-ink/10 bg-white/40 py-2.5 text-sm font-medium text-ink-faint"
+            className="mt-6 w-full rounded-full border border-ink/10 bg-surface-2 py-2.5 text-sm font-medium text-ink-faint"
           >
             Current plan
           </button>

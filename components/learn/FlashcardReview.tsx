@@ -39,7 +39,7 @@ export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck;
         </p>
         <button
           onClick={onExit}
-          className="mt-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5"
+          className="mt-2 rounded-full bg-cta px-5 py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5"
         >
           Back to decks
         </button>
@@ -59,7 +59,7 @@ export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck;
         </span>
       </div>
 
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-cta/10">
         <div
           className={`h-full rounded-full ${c.bar} transition-all duration-500`}
           style={{ width: `${(reviewed / deck.cards.length) * 100}%` }}

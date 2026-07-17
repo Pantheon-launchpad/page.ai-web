@@ -63,7 +63,7 @@ export default function ChatPanel({
               className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                 m.role === "user"
                   ? "rounded-tr-sm bg-signal text-white"
-                  : "rounded-tl-sm border border-ink/10 bg-white/70 text-ink"
+                  : "rounded-tl-sm border border-ink/10 bg-surface-1 text-ink"
               }`}
             >
               {m.text}
@@ -76,7 +76,7 @@ export default function ChatPanel({
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-signal text-white">
               <Icon name={avatarIcon} className="h-4 w-4" />
             </div>
-            <div className="flex items-center gap-1 rounded-2xl rounded-tl-sm border border-ink/10 bg-white/70 px-4 py-3">
+            <div className="flex items-center gap-1 rounded-2xl rounded-tl-sm border border-ink/10 bg-surface-1 px-4 py-3">
               <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink-faint [animation-delay:-0.3s]" />
               <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink-faint [animation-delay:-0.15s]" />
               <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink-faint" />
@@ -91,7 +91,7 @@ export default function ChatPanel({
             <button
               key={chip.label}
               onClick={() => send(chip.label)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/50 px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-signal/30 hover:bg-signal-soft hover:text-signal-deep"
+              className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-signal/30 hover:bg-signal-soft hover:text-signal-deep"
             >
               <Icon name={chip.icon} className="h-3.5 w-3.5" />
               {chip.label}
@@ -111,7 +111,7 @@ export default function ChatPanel({
             onChange={(e) => setInput(e.target.value)}
             placeholder={inputPlaceholder}
             aria-label={`Message ${avatarLabel}`}
-            className="flex-1 rounded-full border border-ink/10 bg-white/60 px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-signal/40 focus:outline-none"
+            className="flex-1 rounded-full border border-ink/10 bg-surface-1 px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-signal/40 focus:outline-none"
           />
           <button
             type="submit"

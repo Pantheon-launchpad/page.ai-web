@@ -41,7 +41,7 @@ export default function TiltCard({
     const node = ref.current;
     if (!node) return;
     // Clear the inline transform (rather than resetting to identity) so any
-    // CSS animation on the same element - e.g. an idle float - can resume
+    // CSS animation on the same element — e.g. an idle float — can resume
     // driving `transform` once the pointer interaction ends.
     node.style.transform = "";
     if (glareRef.current) glareRef.current.style.background = "transparent";

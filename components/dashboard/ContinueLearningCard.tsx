@@ -30,7 +30,7 @@ export default function ContinueLearningCard() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 self-start rounded-2xl border border-ink/10 bg-white/50 p-4 sm:self-center">
+        <div className="flex items-center gap-4 self-start rounded-2xl border border-ink/10 bg-surface-1 p-4 sm:self-center">
           <RingProgress percent={continueLearning.progressPercent} label={`${continueLearning.progressPercent}%`} />
           <div className="font-mono text-[11px] uppercase leading-relaxed tracking-wide text-ink-faint">
             Topic

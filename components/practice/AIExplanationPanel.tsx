@@ -83,7 +83,7 @@ export default function AIExplanationPanel({
               {question.relatedConcepts.map((c) => (
                 <span
                   key={c}
-                  className="rounded-full border border-ink/10 bg-white/50 px-2.5 py-1 text-xs text-ink-soft"
+                  className="rounded-full border border-ink/10 bg-surface-1 px-2.5 py-1 text-xs text-ink-soft"
                 >
                   {c}
                 </span>
@@ -97,7 +97,7 @@ export default function AIExplanationPanel({
         {onRetry && (
           <button
             onClick={onRetry}
-            className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/50 px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink/20"
+            className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-surface-1 px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink/20"
           >
             <Icon name="refresh" className="h-4 w-4" />
             Retry
@@ -115,7 +115,7 @@ export default function AIExplanationPanel({
         {onContinue && (
           <button
             onClick={onContinue}
-            className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+            className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-cta px-4 py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
           >
             Continue
             <Icon name="arrowRight" className="h-4 w-4" />

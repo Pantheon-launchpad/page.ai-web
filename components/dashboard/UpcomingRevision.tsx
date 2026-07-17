@@ -13,7 +13,7 @@ export default function UpcomingRevision() {
         {upcomingRevision.map((item) => (
           <li
             key={item.id}
-            className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-white/40 px-3.5 py-3"
+            className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-surface-2 px-3.5 py-3"
           >
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-ink">{item.topic}</p>

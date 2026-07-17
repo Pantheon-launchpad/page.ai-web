@@ -21,14 +21,14 @@ export default function FlashcardsClient() {
           <div key={deck.id} className="glass-card flex flex-col rounded-3xl p-6">
             <div className="flex items-start justify-between">
               <div className={`flex h-10 w-10 items-center justify-center rounded-2xl ${c.soft} ${c.text}`}>
-                <Icon name="flashcard" className="h-4.5 w-4.5" />
+                <Icon name="flashcard" className="h-[18px] w-[18px]" />
               </div>
               {deck.dueToday > 0 ? (
                 <span className={`rounded-full ${c.soft} ${c.text} px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide`}>
                   {deck.dueToday} due
                 </span>
               ) : (
-                <span className="rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide text-ink-faint">
+                <span className="rounded-full bg-cta/5 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide text-ink-faint">
                   Up to date
                 </span>
               )}
@@ -39,7 +39,7 @@ export default function FlashcardsClient() {
 
             <button
               onClick={() => setActive(deck)}
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-ink py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-cta py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
             >
               {deck.dueToday > 0 ? "Review now" : "Study anyway"}
               <Icon name="arrowRight" className="h-4 w-4" />

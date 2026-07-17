@@ -63,7 +63,7 @@ export default function Pricing() {
               <div
                 className={`relative flex h-full flex-col rounded-3xl p-8 ${
                   p.featured
-                    ? "glass-card-deep text-paper shadow-lift"
+                    ? "glass-card-deep text-cta-text shadow-lift"
                     : "glass-card text-ink"
                 }`}
               >
@@ -110,7 +110,7 @@ export default function Pricing() {
                   className={`mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-colors ${
                     p.featured
                       ? "bg-signal text-white hover:bg-signal-deep"
-                      : "border border-ink/15 text-ink hover:bg-ink hover:text-paper"
+                      : "border border-ink/15 text-ink hover:bg-cta hover:text-cta-text"
                   }`}
                 >
                   {p.cta}

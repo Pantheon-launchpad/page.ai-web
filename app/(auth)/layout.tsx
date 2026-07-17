@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SignalMark from "@/components/SignalMark";
+import PageTransition from "@/components/dashboard/PageTransition";
 
 export const metadata: Metadata = {
   title: "Page.AI",
@@ -19,7 +20,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <SignalMark animated />
           Page.AI
         </Link>
-        {children}
+        <PageTransition>{children}</PageTransition>
       </div>
     </main>
   );

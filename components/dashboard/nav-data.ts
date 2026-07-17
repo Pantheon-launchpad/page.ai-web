@@ -10,6 +10,7 @@ export type NavItem = {
 export type NavSection = {
   label: string;
   items: NavItem[];
+  collapsible?: boolean;
 };
 
 export const navSections: NavSection[] = [
@@ -49,6 +50,7 @@ export const navSections: NavSection[] = [
   },
   {
     label: "Lumo",
+    collapsible: true,
     items: [
       { label: "Lumo Home", href: "/lumo", icon: "lumo" },
       { label: "Customize Lumo", href: "/lumo/customize", icon: "wand", soon: true },
@@ -73,10 +75,15 @@ export const navSections: NavSection[] = [
       { label: "Help", href: "/help", icon: "help" },
     ],
   },
+  {
+    label: "Earn",
+    items: [{ label: "Earn", href: "/earn", icon: "coin" }],
+  },
 ];
 
 export const builtRoutes = new Set([
   "/dashboard",
+  "/earn",
   "/subjects",
   "/resources",
   "/ai-tutor",

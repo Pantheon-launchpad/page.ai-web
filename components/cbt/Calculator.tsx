@@ -75,7 +75,7 @@ export default function Calculator({ onClose }: { onClose: () => void }) {
           <Icon name="close" className="h-4 w-4" />
         </button>
       </div>
-      <div className="mb-3 truncate rounded-xl border border-ink/10 bg-white/60 px-3 py-3 text-right font-mono text-lg text-ink">
+      <div className="mb-3 truncate rounded-xl border border-ink/10 bg-surface-1 px-3 py-3 text-right font-mono text-lg text-ink">
         {display}
       </div>
       <div className="grid grid-cols-4 gap-1.5">
@@ -109,7 +109,7 @@ function CalcButton({ label, onPress }: { label: string; onPress: () => void }) 
     <button
       onClick={onPress}
       className={`rounded-lg py-2.5 text-sm font-medium transition-colors ${
-        isOperator ? "bg-signal-soft text-signal-deep hover:bg-signal hover:text-white" : "bg-white/50 text-ink hover:bg-white/80"
+        isOperator ? "bg-signal-soft text-signal-deep hover:bg-signal hover:text-white" : "bg-surface-1 text-ink hover:bg-surface-hover"
       }`}
     >
       {label}

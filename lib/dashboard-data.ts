@@ -1,10 +1,10 @@
 export const student = {
   name: "David",
   initials: "D",
-  xp: 4280,
+  coins: 4280,
   level: 12,
-  xpIntoLevel: 640,
-  xpForNextLevel: 1000,
+  coinsIntoLevel: 640,
+  coinsForNextLevel: 1000,
   streak: 9,
   studyMinutesToday: 42,
   studyGoalMinutes: 60,
@@ -61,6 +61,7 @@ export const quickActions = [
   { label: "Take CBT", icon: "exam" as const, href: "/cbt" },
   { label: "Chat with Book", icon: "chat" as const, href: "/chat-with-book" },
   { label: "Ask AI", icon: "tutor" as const, href: "/ai-tutor" },
+  { label: "Earn Coins", icon: "coin" as const, href: "/earn" },
   { label: "Mistake Book", icon: "mistake" as const, href: "/mistakes" },
   { label: "Resource Library", icon: "library" as const, href: "/resources" },
 ];

@@ -40,7 +40,7 @@ export default function AuthInput({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           autoComplete={autoComplete}
-          className={`w-full rounded-xl border bg-white/60 py-2.5 pl-10 text-sm text-ink placeholder:text-ink-faint focus:outline-none ${
+          className={`w-full rounded-xl border bg-surface-1 py-2.5 pl-10 text-sm text-ink placeholder:text-ink-faint focus:outline-none ${
             isPassword ? "pr-10" : "pr-4"
           } ${error ? "border-ember/50 focus:border-ember" : "border-ink/10 focus:border-signal/40"}`}
         />

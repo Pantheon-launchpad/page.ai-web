@@ -2,7 +2,7 @@ import SignalMark from "./SignalMark";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink px-6 py-16 text-paper md:px-10">
+    <footer className="theme-fixed-dark bg-ink px-6 py-16 text-paper md:px-10">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>

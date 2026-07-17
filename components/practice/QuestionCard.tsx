@@ -34,11 +34,11 @@ export default function QuestionCard({
           const isChosen = chosenIndex === i;
           const isCorrect = i === question.correctIndex;
 
-          let style = "border-ink/10 bg-white/40 hover:border-signal/30 hover:bg-signal-soft";
+          let style = "border-ink/10 bg-surface-2 hover:border-signal/30 hover:bg-signal-soft";
           if (locked) {
             if (isCorrect) style = "border-moss/40 bg-moss-soft text-moss";
             else if (isChosen) style = "border-ember/40 bg-ember-soft text-ember";
-            else style = "border-ink/10 bg-white/20 opacity-60";
+            else style = "border-ink/10 bg-surface-2 opacity-60";
           } else if (isChosen) {
             style = "border-signal/40 bg-signal-soft";
           }

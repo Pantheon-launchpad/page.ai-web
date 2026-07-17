@@ -3,7 +3,7 @@ import PageHeader from "@/components/learn/PageHeader";
 import ExamPicker from "@/components/cbt/ExamPicker";
 import { cbtPapers } from "@/lib/practice-data";
 
-export const metadata: Metadata = { title: "CBT Exams - Page.AI" };
+export const metadata: Metadata = { title: "CBT Exams — Page.AI" };
 
 export default function CBTPage() {
   return (

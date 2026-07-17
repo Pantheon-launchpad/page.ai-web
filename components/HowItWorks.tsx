@@ -41,7 +41,7 @@ export default function HowItWorks() {
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 90} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
               <div className="glass-card relative h-full rounded-3xl p-7">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink font-mono text-[12px] text-paper">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cta font-mono text-[12px] text-cta-text">
                   {s.n}
                 </span>
                 <h3 className="mt-5 font-display text-[1.1rem] font-semibold text-ink">{s.title}</h3>

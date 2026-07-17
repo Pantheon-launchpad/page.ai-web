@@ -117,7 +117,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
           {config.hasCalculator && (
             <button
               onClick={() => setShowCalculator((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/10 bg-white/50 text-ink-soft hover:border-ink/20"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/10 bg-surface-1 text-ink-soft hover:border-ink/20"
               aria-label="Toggle calculator"
             >
               <Icon name="calculator" className="h-4 w-4" />
@@ -125,7 +125,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
           )}
           <div
             className={`flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-mono text-sm font-semibold ${
-              urgent ? "border-ember/40 bg-ember-soft text-ember" : "border-ink/10 bg-white/60 text-ink"
+              urgent ? "border-ember/40 bg-ember-soft text-ember" : "border-ink/10 bg-surface-1 text-ink"
             }`}
           >
             <Icon name="clock" className="h-4 w-4" />
@@ -146,7 +146,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                   flagged.has(index)
                     ? "border-ember/40 bg-ember-soft text-ember"
-                    : "border-ink/10 bg-white/50 text-ink-soft hover:border-ink/20"
+                    : "border-ink/10 bg-surface-1 text-ink-soft hover:border-ink/20"
                 }`}
               >
                 <Icon name="flag" className="h-3.5 w-3.5" />
@@ -164,7 +164,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
                   className={`rounded-xl border px-4 py-3 text-left text-sm font-medium text-ink transition-colors ${
                     answers[index] === i
                       ? "border-signal/40 bg-signal-soft"
-                      : "border-ink/10 bg-white/40 hover:border-signal/30 hover:bg-signal-soft/60"
+                      : "border-ink/10 bg-surface-2 hover:border-signal/30 hover:bg-signal-soft/60"
                   }`}
                 >
                   {option}
@@ -177,7 +177,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
             <button
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
               disabled={index === 0}
-              className="rounded-full border border-ink/10 bg-white/50 px-4 py-2.5 text-sm font-medium text-ink disabled:opacity-40"
+              className="rounded-full border border-ink/10 bg-surface-1 px-4 py-2.5 text-sm font-medium text-ink disabled:opacity-40"
             >
               Previous
             </button>
@@ -192,7 +192,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
             ) : (
               <button
                 onClick={() => setIndex((i) => Math.min(questions.length - 1, i + 1))}
-                className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+                className="rounded-full bg-cta px-5 py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
               >
                 Next
               </button>
@@ -210,7 +210,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
           />
           <button
             onClick={() => setConfirmSubmit(true)}
-            className="rounded-full border border-ink/10 bg-white/50 py-2.5 text-sm font-medium text-ink hover:border-ink/20"
+            className="rounded-full border border-ink/10 bg-surface-1 py-2.5 text-sm font-medium text-ink hover:border-ink/20"
           >
             Submit exam
           </button>
@@ -224,7 +224,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
       )}
 
       {confirmSubmit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-6 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-cta/40 px-6 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm rounded-3xl p-6 text-center">
             <h3 className="font-display text-lg font-semibold text-ink">Submit this exam?</h3>
             <p className="mt-2 text-sm text-ink-soft">
@@ -233,7 +233,7 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
             <div className="mt-5 flex gap-3">
               <button
                 onClick={() => setConfirmSubmit(false)}
-                className="flex-1 rounded-full border border-ink/10 bg-white/50 py-2.5 text-sm font-medium text-ink"
+                className="flex-1 rounded-full border border-ink/10 bg-surface-1 py-2.5 text-sm font-medium text-ink"
               >
                 Keep going
               </button>

@@ -44,7 +44,7 @@ export default function ResourceLibraryClient() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search notes, past questions, formula sheets..."
-            className="w-full rounded-full border border-ink/10 bg-white/60 py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-signal/40 focus:outline-none"
+            className="w-full rounded-full border border-ink/10 bg-surface-1 py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-signal/40 focus:outline-none"
           />
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function ResourceLibraryClient() {
               className={`rounded-full border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors ${
                 active
                   ? "border-signal bg-signal text-white"
-                  : "border-ink/10 bg-white/50 text-ink-soft hover:border-ink/20"
+                  : "border-ink/10 bg-surface-1 text-ink-soft hover:border-ink/20"
               }`}
             >
               {label}

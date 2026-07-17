@@ -1,14 +1,24 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Type */
+  /* Type — these reference variables injected by next/font, so they need
+     `inline` to resolve correctly. */
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
   --font-mono: var(--font-plex-mono);
+}
 
-  /* Color system - "paper & signal"
+@theme {
+  /* Color system — "paper & signal"
      A warm offline paper tone paired with a decisive signal blue.
-     The blue is literal: it's the one signal Page.AI never needs. */
+     The blue is literal: it's the one signal Page.AI never needs.
+
+     Deliberately NOT `@theme inline` — these are plain values, and without
+     `inline` Tailwind keeps them as `var(--color-x)` references inside the
+     generated utilities (e.g. `.bg-paper { background-color: var(--color-paper) }`)
+     instead of baking in the literal hex at build time. That's what lets the
+     `.dark` overrides below actually retheme every `bg-*`/`text-*`/`border-*`
+     utility at runtime instead of only the hand-written CSS rules. */
   --color-paper: #f6eee1;
   --color-paper-deep: #efe1c9;
   --color-line: #e2d2b8;
@@ -23,10 +33,109 @@
   --color-moss: #52795f;
   --color-moss-soft: #dfe8dd;
 
-  --shadow-glass:
-    0 1px 1px rgba(22, 33, 58, 0.03), 0 12px 32px -16px rgba(22, 33, 58, 0.18);
-  --shadow-lift:
-    0 1px 1px rgba(22, 33, 58, 0.04), 0 24px 48px -20px rgba(22, 33, 58, 0.28);
+  --color-surface-1: rgba(255, 255, 255, 0.55);
+  --color-surface-2: rgba(255, 255, 255, 0.32);
+  --color-surface-hover: rgba(255, 255, 255, 0.8);
+
+  /* The app's solid branded pill button (dark fill, cream text). Deliberately
+     NOT redefined under .dark — ink/paper swap roles for readability in dark
+     mode, but this specific "solid CTA" fill is meant to read the same,
+     consistently branded pill in both themes rather than inverting to a
+     bright block. */
+  --color-cta: #16213a;
+  --color-cta-text: #f6eee1;
+
+  --shadow-glass: 0 1px 1px rgba(22, 33, 58, 0.03), 0 12px 32px -16px rgba(22, 33, 58, 0.18);
+  --shadow-lift: 0 1px 1px rgba(22, 33, 58, 0.04), 0 24px 48px -20px rgba(22, 33, 58, 0.28);
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Dark mode — "ink & signal, after dark". Ink and paper swap roles rather
+   than fading to grey, so the theme still feels like the same brand. */
+.dark {
+  color-scheme: dark;
+
+  --color-paper: #14192b;
+  --color-paper-deep: #0d1120;
+  --color-line: #2b3454;
+  --color-ink: #f3ede0;
+  --color-ink-soft: #b6b3c6;
+  --color-ink-faint: #7c7a90;
+  --color-signal: #4d76f0;
+  --color-signal-deep: #a3bafa;
+  --color-signal-soft: #1f2c52;
+  --color-ember: #e39868;
+  --color-ember-soft: #3a2c20;
+  --color-moss: #82d19c;
+  --color-moss-soft: #1d2f24;
+
+  --color-surface-1: rgba(255, 255, 255, 0.07);
+  --color-surface-2: rgba(255, 255, 255, 0.04);
+  --color-surface-hover: rgba(255, 255, 255, 0.12);
+
+  --shadow-glass: 0 1px 1px rgba(0, 0, 0, 0.3), 0 12px 32px -16px rgba(0, 0, 0, 0.55);
+  --shadow-lift: 0 1px 1px rgba(0, 0, 0, 0.35), 0 24px 48px -20px rgba(0, 0, 0, 0.65);
+}
+
+/* Soft / low-glare — a dimmer, lower-contrast light theme for people who
+   find bright white/cream surfaces and strong contrast uncomfortable but
+   still don't want a fully dark UI (light sensitivity, some forms of visual
+   impairment, migraine triggers). Muted rather than dark: lower luminance,
+   softer contrast, desaturated accents, gentler shadows. Still light-mode
+   for native form controls (color-scheme: light). */
+.soft {
+  color-scheme: light;
+
+  --color-paper: #e7e2d5;
+  --color-paper-deep: #ddd5c1;
+  --color-line: #cec5b0;
+  --color-ink: #454b58;
+  --color-ink-soft: #6b7080;
+  --color-ink-faint: #93949e;
+  --color-signal: #6785c9;
+  --color-signal-deep: #4d668f;
+  --color-signal-soft: #dce2ee;
+  --color-ember: #a97854;
+  --color-ember-soft: #e8dccb;
+  --color-moss: #6b8571;
+  --color-moss-soft: #e0e4db;
+
+  --color-surface-1: rgba(255, 255, 255, 0.38);
+  --color-surface-2: rgba(255, 255, 255, 0.22);
+  --color-surface-hover: rgba(255, 255, 255, 0.55);
+
+  --shadow-glass: 0 1px 1px rgba(69, 75, 88, 0.03), 0 12px 28px -18px rgba(69, 75, 88, 0.14);
+  --shadow-lift: 0 1px 1px rgba(69, 75, 88, 0.04), 0 20px 40px -20px rgba(69, 75, 88, 0.2);
+}
+
+/* A handful of marketing sections (Footer, the phone mockup) are art-directed
+   to always look dark, regardless of site theme — pin their tokens back to
+   the light-mode values so they don't invert into a bright block. */
+.theme-fixed-dark {
+  color-scheme: dark;
+  --color-paper: #f6eee1;
+  --color-paper-deep: #efe1c9;
+  --color-line: #e2d2b8;
+  --color-ink: #16213a;
+  --color-ink-soft: #565f78;
+  --color-ink-faint: #8a8c9c;
+  --color-signal: #2e5fea;
+  --color-signal-deep: #1d3f9e;
+  --color-signal-soft: #dbe5fc;
+  --color-ember: #bd5423;
+  --color-ember-soft: #f2ded0;
+  --color-moss: #52795f;
+  --color-moss-soft: #dfe8dd;
+  --color-surface-1: rgba(255, 255, 255, 0.55);
+  --color-surface-2: rgba(255, 255, 255, 0.32);
+  --color-surface-hover: rgba(255, 255, 255, 0.8);
+}
+
+html {
+  transition: background-color 0.3s ease;
 }
 
 html {
@@ -38,6 +147,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -62,25 +172,26 @@ body {
   pointer-events: none;
   opacity: 0.5;
   mix-blend-mode: multiply;
-  background-image: radial-gradient(
-    rgba(22, 33, 58, 0.05) 0.6px,
-    transparent 0.6px
-  );
+  background-image: radial-gradient(rgba(22, 33, 58, 0.05) 0.6px, transparent 0.6px);
   background-size: 3px 3px;
+}
+.dark .paper-grain::before {
+  opacity: 0.6;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 0.6px, transparent 0.6px);
+}
+.soft .paper-grain::before {
+  opacity: 0.35;
+  background-image: radial-gradient(rgba(69, 75, 88, 0.045) 0.6px, transparent 0.6px);
 }
 
 /* Real glass: a bright top-left sheen, a darker bottom-right falloff, an inner
    rim light on the top edge, and enough saturation lift that whatever sits
-   behind the card still tints it - not just a flat white overlay. */
+   behind the card still tints it — not just a flat white overlay. */
 .glass-card {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.22) 55%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.22) 55%, rgba(255, 255, 255, 0.3) 100%);
   backdrop-filter: blur(22px) saturate(165%);
   -webkit-backdrop-filter: blur(22px) saturate(165%);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -98,12 +209,7 @@ body {
   pointer-events: none;
   z-index: -1;
   opacity: 0;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.55) 40%,
-    transparent 60%
-  );
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55) 40%, transparent 60%);
   background-size: 220% 220%;
   background-position: 120% 0%;
   transition: opacity 0.4s ease;
@@ -114,133 +220,96 @@ body {
   animation: shine-sweep 1.1s ease forwards;
 }
 
+.dark .glass-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 55%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+    var(--shadow-glass);
+}
+.dark .glass-card::after {
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.08) 40%, transparent 60%);
+}
+
+.soft .glass-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 55%, rgba(255, 255, 255, 0.16) 100%);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 0 0 1px rgba(69, 75, 88, 0.04),
+    var(--shadow-glass);
+}
+.soft .glass-card::after {
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.3) 40%, transparent 60%);
+}
+
 .glass-card-deep {
   position: relative;
-  background: linear-gradient(
-    155deg,
-    rgba(38, 52, 84, 0.95) 0%,
-    rgba(16, 24, 43, 0.92) 100%
-  );
+  background: linear-gradient(155deg, rgba(38, 52, 84, 0.95) 0%, rgba(16, 24, 43, 0.92) 100%);
   backdrop-filter: blur(22px) saturate(165%);
   -webkit-backdrop-filter: blur(22px) saturate(165%);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    var(--shadow-lift);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), var(--shadow-lift);
+}
+.dark .glass-card-deep {
+  background: linear-gradient(155deg, rgba(8, 12, 26, 0.95) 0%, rgba(3, 5, 12, 0.92) 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.soft .glass-card-deep {
+  background: linear-gradient(155deg, rgba(58, 66, 84, 0.95) 0%, rgba(41, 47, 61, 0.92) 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), var(--shadow-lift);
 }
 
 @keyframes shine-sweep {
-  from {
-    background-position: 120% 0%;
-  }
-  to {
-    background-position: -20% 100%;
-  }
+  from { background-position: 120% 0%; }
+  to { background-position: -20% 100%; }
 }
 
 @keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes float-y-sm {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes drift-1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(30px, -24px) scale(1.08);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -24px) scale(1.08); }
 }
 
 @keyframes drift-2 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-24px, 20px) scale(1.05);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-24px, 20px) scale(1.05); }
 }
 
-.animate-float {
-  animation: float-y 5.5s ease-in-out infinite;
-}
-.animate-float-sm {
-  animation: float-y-sm 4.2s ease-in-out infinite;
-  animation-delay: 0.6s;
-}
-.animate-drift-1 {
-  animation: drift-1 14s ease-in-out infinite;
-}
-.animate-drift-2 {
-  animation: drift-2 17s ease-in-out infinite;
-}
+.animate-float { animation: float-y 5.5s ease-in-out infinite; }
+.animate-float-sm { animation: float-y-sm 4.2s ease-in-out infinite; animation-delay: 0.6s; }
+.animate-drift-1 { animation: drift-1 14s ease-in-out infinite; }
+.animate-drift-2 { animation: drift-2 17s ease-in-out infinite; }
 
 @keyframes bars-fill {
-  0%,
-  100% {
-    transform: scaleY(0.35);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
+  0%, 100% { transform: scaleY(0.35); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
 }
 
-.bar-anim-1 {
-  animation: bars-fill 2.2s ease-in-out infinite;
-  animation-delay: 0ms;
-  transform-origin: bottom;
-}
-.bar-anim-2 {
-  animation: bars-fill 2.2s ease-in-out infinite;
-  animation-delay: 160ms;
-  transform-origin: bottom;
-}
-.bar-anim-3 {
-  animation: bars-fill 2.2s ease-in-out infinite;
-  animation-delay: 320ms;
-  transform-origin: bottom;
-}
-.bar-anim-4 {
-  animation: bars-fill 2.2s ease-in-out infinite;
-  animation-delay: 480ms;
-  transform-origin: bottom;
-}
+.bar-anim-1 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 0ms; transform-origin: bottom; }
+.bar-anim-2 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 160ms; transform-origin: bottom; }
+.bar-anim-3 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 320ms; transform-origin: bottom; }
+.bar-anim-4 { animation: bars-fill 2.2s ease-in-out infinite; animation-delay: 480ms; transform-origin: bottom; }
 
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal-left {
-  transform: translate(-22px, 0);
-}
-.reveal-right {
-  transform: translate(22px, 0);
-}
-.reveal-scale {
-  transform: scale(0.94);
-}
+.reveal-left { transform: translate(-22px, 0); }
+.reveal-right { transform: translate(22px, 0); }
+.reveal-scale { transform: scale(0.94); }
 .reveal.is-visible {
   opacity: 1;
   transform: translate(0, 0) scale(1);
@@ -268,75 +337,30 @@ body {
 
 /* Small pop-in for interactive icons/badges */
 @keyframes pop-in {
-  from {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
 }
-.animate-pop-in {
-  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+.animate-pop-in { animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+.animate-page-in { animation: page-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 @keyframes flame-flicker {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  25% {
-    transform: scale(1.04) rotate(-1.5deg);
-    opacity: 0.95;
-  }
-  50% {
-    transform: scale(0.98) rotate(1deg);
-    opacity: 1;
-  }
-  75% {
-    transform: scale(1.03) rotate(-0.5deg);
-    opacity: 0.97;
-  }
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  25% { transform: scale(1.04) rotate(-1.5deg); opacity: 0.95; }
+  50% { transform: scale(0.98) rotate(1deg); opacity: 1; }
+  75% { transform: scale(1.03) rotate(-0.5deg); opacity: 0.97; }
 }
-.animate-flame-flicker {
-  animation: flame-flicker 2.6s ease-in-out infinite;
-}
+.animate-flame-flicker { animation: flame-flicker 2.6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .bar-anim-1,
-  .bar-anim-2,
-  .bar-anim-3,
-  .bar-anim-4 {
-    animation: none;
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  .reveal,
-  .reveal-left,
-  .reveal-right,
-  .reveal-scale {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .animate-float,
-  .animate-float-sm,
-  .animate-drift-1,
-  .animate-drift-2,
-  .animate-pop-in,
-  .animate-flame-flicker {
-    animation: none;
-  }
-  .nav-link::after {
-    transition: none;
-  }
-  .glass-card:hover::after {
-    animation: none;
-    opacity: 0;
-  }
+  html { scroll-behavior: auto; }
+  .bar-anim-1, .bar-anim-2, .bar-anim-3, .bar-anim-4 { animation: none; transform: scaleY(1); opacity: 1; }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; transition: none; }
+  .animate-float, .animate-float-sm, .animate-drift-1, .animate-drift-2, .animate-pop-in, .animate-flame-flicker, .animate-page-in { animation: none; }
+  .nav-link::after { transition: none; }
+  .glass-card:hover::after { animation: none; opacity: 0; }
 }

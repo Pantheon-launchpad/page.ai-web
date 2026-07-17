@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import ChatWithBookClient from "@/components/learn/ChatWithBookClient";
 
-export const metadata: Metadata = { title: "Chat with Book - Page.AI" };
+export const metadata: Metadata = { title: "Chat with Book — Page.AI" };
 
 export default function ChatWithBookPage() {
   return (
@@ -11,7 +11,7 @@ export default function ChatWithBookPage() {
         eyebrow="Learn"
         icon="chat"
         title="Chat with Book"
-        description="Not another chatbot - a conversation with the actual material, in whatever voice helps it click."
+        description="Not another chatbot — a conversation with the actual material, in whatever voice helps it click."
       />
       <ChatWithBookClient />
     </div>

@@ -23,7 +23,7 @@ export default function ResourceCard({
   return (
     <div className="glass-card flex items-start gap-3.5 rounded-2xl p-[18px]">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-signal-soft text-signal-deep">
-        <Icon name={typeIcon[resource.type]} className="h-4.5 w-4.5" />
+        <Icon name={typeIcon[resource.type]} className="h-[18px] w-[18px]" />
       </div>
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-ink">{resource.title}</p>

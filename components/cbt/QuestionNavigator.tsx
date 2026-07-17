@@ -25,7 +25,7 @@ export default function QuestionNavigator({
           const answered = answeredIds.has(i);
           const flagged = flaggedIds.has(i);
 
-          let style = "border-ink/10 bg-white/40 text-ink-soft";
+          let style = "border-ink/10 bg-surface-2 text-ink-soft";
           if (answered) style = "border-moss/30 bg-moss-soft text-moss";
           if (flagged) style = "border-ember/40 bg-ember-soft text-ember";
           if (isCurrent) style = "border-signal bg-signal text-white";
@@ -49,7 +49,7 @@ export default function QuestionNavigator({
         <LegendRow swatch="bg-signal" label="Current" />
         <LegendRow swatch="bg-moss-soft border border-moss/30" label="Answered" />
         <LegendRow swatch="bg-ember-soft border border-ember/40" label="Flagged" />
-        <LegendRow swatch="bg-white/40 border border-ink/10" label="Unanswered" />
+        <LegendRow swatch="bg-surface-2 border border-ink/10" label="Unanswered" />
       </div>
     </div>
   );

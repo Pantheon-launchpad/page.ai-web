@@ -18,7 +18,7 @@ export default function QuickActions() {
             <Link
               key={action.label}
               href={href}
-              className="group flex flex-col items-center gap-2 rounded-2xl border border-ink/10 bg-white/40 px-3 py-4 text-center transition-colors hover:border-signal/30 hover:bg-signal-soft"
+              className="group flex flex-col items-center gap-2 rounded-2xl border border-ink/10 bg-surface-2 px-3 py-4 text-center transition-colors hover:border-signal/30 hover:bg-signal-soft"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-signal-soft text-signal-deep transition-colors group-hover:bg-signal group-hover:text-white">
                 <Icon name={action.icon} className="h-4 w-4" />

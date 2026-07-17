@@ -24,7 +24,7 @@ export default function ExamPicker({ exams }: { exams: ExamConfig[] }) {
         <div key={exam.id} className="glass-card flex flex-col rounded-3xl p-6">
           <div className="flex items-start justify-between">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-signal-soft text-signal-deep">
-              <Icon name="exam" className="h-4.5 w-4.5" />
+              <Icon name="exam" className="h-[18px] w-[18px]" />
             </div>
             <span className={`rounded-full px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide ${boardTone[exam.board]}`}>
               {exam.board}
@@ -39,7 +39,7 @@ export default function ExamPicker({ exams }: { exams: ExamConfig[] }) {
 
           <button
             onClick={() => setActive(exam)}
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-ink py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-cta py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
           >
             <Icon name="play" className="h-4 w-4" />
             Start exam

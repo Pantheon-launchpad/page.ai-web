@@ -28,7 +28,7 @@ export default function MistakeBookClient() {
             className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
               subjectFilter === s
                 ? "border-signal bg-signal text-white"
-                : "border-ink/10 bg-white/50 text-ink-soft hover:border-ink/20"
+                : "border-ink/10 bg-surface-1 text-ink-soft hover:border-ink/20"
             }`}
           >
             {s}
@@ -52,7 +52,7 @@ export default function MistakeBookClient() {
                   className="glass-card flex w-full items-center gap-3.5 rounded-2xl p-4 text-left"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ember-soft text-ember">
-                    <Icon name="mistake" className="h-4.5 w-4.5" />
+                    <Icon name="mistake" className="h-[18px] w-[18px]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium text-ink">{m.question.prompt}</p>

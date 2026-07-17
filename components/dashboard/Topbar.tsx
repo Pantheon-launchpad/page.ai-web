@@ -2,6 +2,8 @@
 
 import { Icon } from "./icons";
 import { student } from "@/lib/dashboard-data";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import ProfileMenu from "./ProfileMenu";
 
 export default function Topbar({ onMenu }: { onMenu: () => void }) {
   return (
@@ -9,7 +11,7 @@ export default function Topbar({ onMenu }: { onMenu: () => void }) {
       <button
         onClick={onMenu}
         aria-label="Open menu"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/60 md:hidden"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-surface-1 md:hidden"
       >
         <span className="relative block h-3 w-4">
           <span className="absolute left-0 top-0 h-[1.5px] w-4 bg-ink" />
@@ -27,20 +29,19 @@ export default function Topbar({ onMenu }: { onMenu: () => void }) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
-        <div className="flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/60 px-3 py-1.5 text-xs font-medium text-ink">
+        <ThemeToggle />
+        <div className="flex items-center gap-1.5 rounded-full border border-ink/10 bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink">
           <Icon name="flame" className="h-4 w-4 text-ember" />
           {student.streak}
         </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/60 px-3 py-1.5 text-xs font-medium text-ink">
-          <Icon name="bolt" className="h-4 w-4 text-signal" />
-          {student.xp.toLocaleString()} XP
-        </div>
-        <button
-          aria-label="Profile"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-display text-sm font-semibold text-paper"
+        <a
+          href="/earn"
+          className="flex items-center gap-1.5 rounded-full border border-ember/25 bg-ember-soft px-3 py-1.5 text-xs font-medium text-ember transition-colors hover:border-ember/40"
         >
-          {student.initials}
-        </button>
+          <Icon name="coin" className="h-4 w-4" />
+          {student.coins.toLocaleString()}
+        </a>
+        <ProfileMenu />
       </div>
     </header>
   );

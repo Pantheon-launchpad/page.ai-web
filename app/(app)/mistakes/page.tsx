@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import MistakeBookClient from "@/components/practice/MistakeBookClient";
 
-export const metadata: Metadata = { title: "Mistake Book - Page.AI" };
+export const metadata: Metadata = { title: "Mistake Book — Page.AI" };
 
 export default function MistakeBookPage() {
   return (

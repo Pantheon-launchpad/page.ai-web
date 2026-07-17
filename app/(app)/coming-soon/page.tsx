@@ -4,7 +4,7 @@ import { Icon, type IconName } from "@/components/dashboard/icons";
 const roadmap = [
   "AI-personalised content, tuned to your syllabus",
   "Fully usable offline, like the rest of Page.AI",
-  "Woven into your XP, streaks and Lumo progress",
+  "Woven into your Page Coins, streaks and Lumo progress",
 ];
 
 export default async function ComingSoonPage({
@@ -35,18 +35,14 @@ export default async function ComingSoonPage({
         {title} is on its way
       </h1>
       <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-soft">
-        We&apos;re still building this part of Page.AI so it meets the same bar
-        as the rest of the app - patient, personal, and built for zero
-        connection. Here&apos;s what to expect.
+        We&apos;re still building this part of Page.AI so it meets the same bar as the rest of the
+        app — patient, personal, and built for zero connection. Here&apos;s what to expect.
       </p>
 
       <div className="glass-card mt-8 w-full rounded-3xl p-6 text-left">
         <ul className="flex flex-col gap-3.5">
           {roadmap.map((line) => (
-            <li
-              key={line}
-              className="flex items-start gap-3 text-sm text-ink-soft"
-            >
+            <li key={line} className="flex items-start gap-3 text-sm text-ink-soft">
               <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-moss-soft text-moss">
                 <Icon name="target" className="h-3 w-3" strokeWidth={2} />
               </span>
@@ -58,7 +54,7 @@ export default async function ComingSoonPage({
 
       <Link
         href="/dashboard"
-        className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+        className="mt-8 inline-flex items-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
       >
         Back to dashboard
         <Icon name="arrowRight" className="h-4 w-4" />

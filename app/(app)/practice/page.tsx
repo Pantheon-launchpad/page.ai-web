@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import PracticeFlowClient from "@/components/practice/PracticeFlowClient";
 
-export const metadata: Metadata = { title: "Practice Mode - Page.AI" };
+export const metadata: Metadata = { title: "Practice Mode — Page.AI" };
 
 export default function PracticePage() {
   return (
