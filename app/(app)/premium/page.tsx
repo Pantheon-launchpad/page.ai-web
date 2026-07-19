@@ -3,10 +3,22 @@
 import { useState } from "react";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { premiumFeatures } from "@/lib/settings-data";
+import { useApi } from "@/hooks/useApi";
+import { PremiumApi } from "@/services/premium.api";
 
 export default function PremiumPage() {
+  const { data: premiumFeatures } = useApi(() => PremiumApi.getPlans(), []);
   const [upgraded, setUpgraded] = useState(false);
+  const [upgrading, setUpgrading] = useState(false);
+
+  async function handleUpgrade() {
+    setUpgrading(true);
+    await PremiumApi.upgrade();
+    setUpgrading(false);
+    setUpgraded(true);
+  }
+
+  if (!premiumFeatures) return null;
 
   return (
     <div className="flex flex-col gap-6">
@@ -58,8 +70,8 @@ export default function PremiumPage() {
           </ul>
 
           <button
-            onClick={() => setUpgraded(true)}
-            disabled={upgraded}
+            onClick={handleUpgrade}
+            disabled={upgraded || upgrading}
             className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-signal-deep disabled:opacity-70"
           >
             {upgraded ? (
@@ -67,6 +79,8 @@ export default function PremiumPage() {
                 <Icon name="check" className="h-4 w-4" />
                 You&apos;re on Premium
               </>
+            ) : upgrading ? (
+              "Upgrading..."
             ) : (
               "Upgrade to Premium"
             )}

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/dashboard/icons";
 import PageHeader from "@/components/learn/PageHeader";
-import { achievements } from "@/lib/progress-data";
-import { student } from "@/lib/dashboard-data";
+import { AchievementApi } from "@/services/achievement.api";
+import { DashboardApi } from "@/services/dashboard.api";
 
 export const metadata: Metadata = { title: "Achievements - Page.AI" };
 
-export default function AchievementsPage() {
+export default async function AchievementsPage() {
+  const [achievements, { student }] = await Promise.all([
+    AchievementApi.getAchievements(),
+    DashboardApi.getDashboard(),
+  ]);
   const earnedCount = achievements.filter((a) => a.earned).length;
 
   return (

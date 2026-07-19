@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { student } from "@/lib/dashboard-data";
-import {
-  weeklyPlan,
-  upcomingExams,
-  plannerRecommendations,
-} from "@/lib/learn-data";
+import { PlannerApi } from "@/services/planner.api";
 
 export const metadata: Metadata = { title: "Study Planner - Page.AI" };
 
-export default function StudyPlannerPage() {
+export default async function StudyPlannerPage() {
+  const {
+    weeklyPlan,
+    upcomingExams,
+    recommendations: plannerRecommendations,
+    dailyGoal,
+  } = await PlannerApi.getPlan();
   const goalPercent = Math.min(
     100,
-    Math.round((student.studyMinutesToday / student.studyGoalMinutes) * 100),
+    Math.round((dailyGoal.minutesToday / dailyGoal.goalMinutes) * 100),
   );
 
   return (
@@ -102,10 +103,10 @@ export default function StudyPlannerPage() {
             </h3>
             <div className="mt-4 flex items-center justify-between">
               <span className="font-display text-2xl font-semibold text-ink">
-                {student.studyMinutesToday}
+                {dailyGoal.minutesToday}
                 <span className="text-sm font-normal text-ink-faint">
                   {" "}
-                  / {student.studyGoalMinutes} min
+                  / {dailyGoal.goalMinutes} min
                 </span>
               </span>
               <span className="font-mono text-xs text-ink-faint">

@@ -8,13 +8,15 @@ import UpcomingRevision from "@/components/dashboard/UpcomingRevision";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RewardsSection from "@/components/rewards/RewardsSection";
 import MissionsCard from "@/components/rewards/MissionsCard";
-import { dailyMissions } from "@/lib/rewards-data";
+import { WalletApi } from "@/services/wallet.api";
 
 export const metadata: Metadata = {
   title: "Dashboard - Page.AI",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const missions = await WalletApi.getMissions();
+
   return (
     <div className="flex flex-col gap-6">
       <Greeting />
@@ -24,7 +26,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col gap-6">
           <AIRecommendationCard />
-          <MissionsCard missions={dailyMissions} limit={4} />
+          <MissionsCard missions={missions} limit={4} />
           <RecentActivity />
         </div>
         <div className="flex flex-col gap-6">

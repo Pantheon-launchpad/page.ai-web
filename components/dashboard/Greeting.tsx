@@ -1,7 +1,7 @@
-import { pickGreeting, student } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 
-export default function Greeting() {
-  const greeting = pickGreeting();
+export default async function Greeting() {
+  const { student, greeting } = await DashboardApi.getDashboard();
 
   return (
     <div>

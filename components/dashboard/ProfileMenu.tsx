@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon, type IconName } from "./icons";
-import { student } from "@/lib/dashboard-data";
 
 const items: { label: string; href: string; icon: IconName }[] = [
   { label: "Profile", href: "/profile", icon: "profile" },
@@ -12,7 +11,14 @@ const items: { label: string; href: string; icon: IconName }[] = [
   { label: "Settings", href: "/settings", icon: "settings" },
 ];
 
-export default function ProfileMenu() {
+interface MenuStudent {
+  name: string;
+  initials: string;
+  coins: number;
+  level: number;
+}
+
+export default function ProfileMenu({ student }: { student: MenuStudent }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();

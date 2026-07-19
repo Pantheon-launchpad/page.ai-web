@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import PageHeader from "@/components/learn/PageHeader";
 import SettingsSection from "@/components/settings/SettingsSection";
 import { Icon } from "@/components/dashboard/icons";
-import { student } from "@/lib/dashboard-data";
+import { UserApi } from "@/services/user.api";
 import ReferralsTab from "@/components/rewards/ReferralsTab";
 
 type Tab = "details" | "referrals";
@@ -23,13 +23,38 @@ function ProfileContent() {
   const initialTab: Tab = searchParams.get("tab") === "referrals" ? "referrals" : "details";
   const [tab, setTab] = useState<Tab>(initialTab);
 
-  const [name, setName] = useState(student.name);
-  const [email, setEmail] = useState("david@example.com");
-  const [school, setSchool] = useState("Federal Government College");
+  const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [school, setSchool] = useState("");
+  const [level, setLevel] = useState(0);
+  const [coins, setCoins] = useState(0);
+  const [streak, setStreak] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  function handleSave(e: React.FormEvent) {
+  useEffect(() => {
+    let cancelled = false;
+    UserApi.getProfile().then((profile) => {
+      if (cancelled) return;
+      setName(profile.name);
+      setEmail(profile.email);
+      setSchool(profile.school ?? "");
+      setLevel(profile.level);
+      setCoins(profile.coins);
+      setStreak(profile.streak);
+      setLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  async function handleSave(e: React.FormEvent) {
     e.preventDefault();
+    setSaving(true);
+    await UserApi.updateProfile({ name, email, school });
+    setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   }
@@ -50,14 +75,14 @@ function ProfileContent() {
               {name.charAt(0).toUpperCase() || "D"}
             </div>
             <div>
-              <p className="font-display text-lg font-semibold text-ink">{name || "Your name"}</p>
+              <p className="font-display text-lg font-semibold text-ink">{loading ? "Loading..." : name || "Your name"}</p>
               <p className="text-xs text-ink-soft">{email}</p>
             </div>
 
             <div className="grid w-full grid-cols-3 gap-2 border-t border-ink/10 pt-4">
-              <MiniStat label="Level" value={String(student.level)} />
-              <MiniStat label="Coins" value={student.coins.toLocaleString()} />
-              <MiniStat label="Streak" value={`${student.streak}d`} />
+              <MiniStat label="Level" value={String(level)} />
+              <MiniStat label="Coins" value={coins.toLocaleString()} />
+              <MiniStat label="Streak" value={`${streak}d`} />
             </div>
           </div>
 
@@ -70,10 +95,11 @@ function ProfileContent() {
               <div className="flex items-center gap-3 pt-1">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-signal-deep disabled:opacity-70"
                 >
                   <Icon name="check" className="h-4 w-4" />
-                  Save changes
+                  {saving ? "Saving..." : "Save changes"}
                 </button>
                 {saved && <span className="text-xs font-medium text-moss">Saved.</span>}
               </div>

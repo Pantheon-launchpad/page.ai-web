@@ -2,19 +2,25 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import ChatPanel, { type ChatChip } from "@/components/learn/ChatPanel";
 import { Icon } from "@/components/dashboard/icons";
-import {
-  tutorCapabilities,
-  tutorExamplePrompts,
-  tutorCannedReplies,
-} from "@/lib/learn-data";
+import { TutorApi } from "@/services/tutor.api";
 
 export const metadata: Metadata = { title: "AI Tutor - Page.AI" };
 
-export default function AiTutorPage() {
+export default async function AiTutorPage() {
+  const {
+    capabilities: tutorCapabilities,
+    examplePrompts: tutorExamplePrompts,
+  } = await TutorApi.getCapabilities();
   const chips: ChatChip[] = tutorExamplePrompts.map((label) => ({
     label,
     icon: "sparkle",
   }));
+
+  async function sendToTutor(message: string) {
+    "use server";
+    const { reply } = await TutorApi.sendMessage(message);
+    return reply;
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -53,8 +59,7 @@ export default function AiTutorPage() {
           },
         ]}
         chips={chips}
-        cannedReplies={tutorCannedReplies}
-        defaultReply={tutorCannedReplies.default}
+        onSend={sendToTutor}
       />
     </div>
   );

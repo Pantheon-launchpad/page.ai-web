@@ -14,16 +14,14 @@ export default function ChatPanel({
   avatarLabel,
   initialMessages,
   chips,
-  cannedReplies,
-  defaultReply,
+  onSend,
   inputPlaceholder = "Ask anything...",
 }: {
   avatarIcon: IconName;
   avatarLabel: string;
   initialMessages: ChatMessage[];
   chips: ChatChip[];
-  cannedReplies: Record<string, string>;
-  defaultReply: string;
+  onSend: (text: string) => Promise<string>;
   inputPlaceholder?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
@@ -35,13 +33,14 @@ export default function ChatPanel({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, typing]);
 
-  function send(text: string) {
+  async function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
     setMessages((prev) => [...prev, { id: nextId(), role: "user", text: trimmed }]);
     setInput("");
     setTyping(true);
-    const reply = cannedReplies[trimmed.toLowerCase()] ?? defaultReply;
+
+    const reply = await onSend(trimmed);
     const delay = 550 + Math.min(reply.length * 8, 900);
     setTimeout(() => {
       setTyping(false);

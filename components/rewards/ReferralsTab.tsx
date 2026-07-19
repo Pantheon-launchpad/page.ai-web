@@ -2,12 +2,8 @@
 
 import { useState } from "react";
 import { Icon, type IconName } from "@/components/dashboard/icons";
-import {
-  referral,
-  referralSteps,
-  referralMilestones,
-  recentReferrals,
-} from "@/lib/rewards-data";
+import { useApi } from "@/hooks/useApi";
+import { ReferralApi } from "@/services/referral.api";
 
 const shareChannels: { label: string; icon: IconName }[] = [
   { label: "WhatsApp", icon: "chat" },
@@ -19,6 +15,11 @@ const shareChannels: { label: string; icon: IconName }[] = [
 
 export default function ReferralsTab() {
   const [copied, setCopied] = useState<"code" | "link" | null>(null);
+  const { data: summary } = useApi(() => ReferralApi.getReferralSummary(), []);
+  const { data: recentReferrals } = useApi(
+    () => ReferralApi.getRecentReferrals(),
+    [],
+  );
 
   function copy(value: string, which: "code" | "link") {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
@@ -28,6 +29,12 @@ export default function ReferralsTab() {
     setTimeout(() => setCopied(null), 1800);
   }
 
+  if (!summary || !recentReferrals) return null;
+  const {
+    referral,
+    steps: referralSteps,
+    milestones: referralMilestones,
+  } = summary;
   const progressPercent = Math.min(
     100,
     Math.round((referral.monthlyProgress / referral.monthlyGoal) * 100),

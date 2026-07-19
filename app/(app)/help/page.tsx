@@ -3,10 +3,14 @@
 import { useState } from "react";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { helpFaqs } from "@/lib/settings-data";
+import { useApi } from "@/hooks/useApi";
+import { HelpApi } from "@/services/help.api";
 
 export default function HelpPage() {
   const [open, setOpen] = useState<number | null>(0);
+  const { data: helpFaqs } = useApi(() => HelpApi.getFaqs(), []);
+
+  if (!helpFaqs) return null;
 
   return (
     <div className="flex flex-col gap-6">

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import SubjectCard from "@/components/learn/SubjectCard";
-import { subjects } from "@/lib/learn-data";
+import { SubjectApi } from "@/services/subject.api";
 
 export const metadata: Metadata = { title: "Subjects - Page.AI" };
 
-export default function SubjectsPage() {
+export default async function SubjectsPage() {
+  const subjects = await SubjectApi.getSubjects();
   const overallHours = subjects.reduce((sum, s) => sum + s.hoursSpent, 0);
   const overallMastery = Math.round(
     subjects.reduce((sum, s) => sum + s.mastery, 0) / subjects.length,

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Icon } from "@/components/dashboard/icons";
 import { accent } from "./colors";
 import FlashcardReview from "./FlashcardReview";
-import { flashcardDecks, type FlashcardDeck } from "@/lib/learn-data";
+import type { FlashcardDeck } from "@/lib/learn-data";
 
-export default function FlashcardsClient() {
+export default function FlashcardsClient({ decks }: { decks: FlashcardDeck[] }) {
   const [active, setActive] = useState<FlashcardDeck | null>(null);
 
   if (active) {
@@ -15,7 +15,7 @@ export default function FlashcardsClient() {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {flashcardDecks.map((deck) => {
+      {decks.map((deck) => {
         const c = accent[deck.color];
         return (
           <div key={deck.id} className="glass-card flex flex-col rounded-3xl p-6">

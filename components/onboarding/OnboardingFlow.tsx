@@ -4,8 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AuthInput from "@/components/auth/AuthInput";
+import GoogleButton from "@/components/auth/GoogleButton";
+import AuthDivider from "@/components/auth/AuthDivider";
 import { Icon } from "@/components/dashboard/icons";
 import { subjectList } from "@/lib/practice-data";
+import { AuthApi } from "@/services/auth.api";
+import { ReferralApi } from "@/services/referral.api";
+import type { ClassLevel, ExamTrack } from "@/types";
 
 const classLevels = ["SS1", "SS2", "SS3", "100 Level", "200 Level"];
 const targetExams = ["WAEC", "JAMB", "NECO", "Post-UTME"];
@@ -29,6 +34,8 @@ export default function OnboardingFlow() {
   const [subjects, setSubjects] = useState<string[]>([]);
   const [referralCode, setReferralCode] = useState("");
 
+  const [submitting, setSubmitting] = useState(false);
+
   function toggle(list: string[], setList: (v: string[]) => void, value: string) {
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
   }
@@ -42,13 +49,33 @@ export default function OnboardingFlow() {
     return Object.keys(next).length === 0;
   }
 
-  function next() {
+  async function next() {
     if (step === 0 && !validateAccount()) return;
     if (step < steps.length - 1) {
       setStep((s) => s + 1);
-    } else {
-      setDone(true);
+      return;
     }
+
+    setSubmitting(true);
+    await AuthApi.signup({
+      name,
+      email,
+      password,
+      classLevel: (classLevel as ClassLevel) ?? undefined,
+      targetExams: exams as ExamTrack[],
+      focusSubjects: subjects,
+      referralCode: referralCode || undefined,
+    });
+    if (referralCode) await ReferralApi.applyCode(referralCode).catch(() => {});
+    setSubmitting(false);
+    setDone(true);
+  }
+
+  function handleGoogleSuccess() {
+    if (!name) setName("David Okafor");
+    if (!email) setEmail("david@gmail.com");
+    setErrors({});
+    setStep(1);
   }
 
   function back() {
@@ -103,6 +130,8 @@ export default function OnboardingFlow() {
       <div key={step} className="animate-pop-in mt-6">
         {step === 0 && (
           <div className="flex flex-col gap-4">
+            <GoogleButton label="Sign up with Google" onSuccess={handleGoogleSuccess} />
+            <AuthDivider label="or sign up with email" />
             <AuthInput label="Full name" icon="profile" value={name} onChange={setName} placeholder="David Okafor" error={errors.name} />
             <AuthInput label="Email" type="email" icon="mail" value={email} onChange={setEmail} placeholder="you@example.com" error={errors.email} />
             <AuthInput
@@ -198,9 +227,10 @@ export default function OnboardingFlow() {
         )}
         <button
           onClick={next}
-          className="ml-auto inline-flex items-center gap-2 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-white shadow-lift transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+          disabled={submitting}
+          className="ml-auto inline-flex items-center gap-2 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-white shadow-lift transition-transform hover:-translate-y-0.5 hover:bg-signal-deep disabled:opacity-70"
         >
-          {step === steps.length - 1 ? "Finish" : "Continue"}
+          {submitting ? "Creating account..." : step === steps.length - 1 ? "Finish" : "Continue"}
           <Icon name="arrowRight" className="h-4 w-4" />
         </button>
       </div>

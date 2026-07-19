@@ -4,17 +4,19 @@ import Heatmap from "@/components/progress/Heatmap";
 import TrendChart from "@/components/progress/TrendChart";
 import SubjectDistributionBar from "@/components/progress/SubjectDistributionBar";
 import TopicPerformanceList from "@/components/progress/TopicPerformanceList";
-import {
-  heatmap,
-  analyticsSummary,
-  learningTrend,
-  topicPerformance,
-  subjectDistribution,
-} from "@/lib/progress-data";
+import { ProgressApi } from "@/services/progress.api";
 
 export const metadata: Metadata = { title: "Analytics - Page.AI" };
 
-export default function AnalyticsPage() {
+export default async function AnalyticsPage() {
+  const {
+    heatmap,
+    summary: analyticsSummary,
+    learningTrend,
+    topicPerformance,
+    subjectDistribution,
+  } = await ProgressApi.getAnalytics();
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader

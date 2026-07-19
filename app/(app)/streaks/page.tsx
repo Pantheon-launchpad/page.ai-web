@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { streakDays, streakHistory, streakStats } from "@/lib/progress-data";
+import { StreakApi } from "@/services/streak.api";
 
 export const metadata: Metadata = { title: "Streaks - Page.AI" };
 
-export default function StreaksPage() {
+export default async function StreaksPage() {
+  const {
+    days: streakDays,
+    history: streakHistory,
+    stats: streakStats,
+  } = await StreakApi.getStreak();
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader

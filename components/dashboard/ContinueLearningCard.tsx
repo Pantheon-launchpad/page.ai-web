@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { continueLearning } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 import { Icon } from "./icons";
 import RingProgress from "./RingProgress";
 
-export default function ContinueLearningCard() {
+export default async function ContinueLearningCard() {
+  const { continueLearning } = await DashboardApi.getDashboard();
+
   return (
     <div className="glass-card relative overflow-hidden rounded-3xl p-6 sm:p-7">
       <div className="pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full bg-signal/10 blur-3xl" />

@@ -1,19 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@/components/dashboard/icons";
 import Calculator from "./Calculator";
 import QuestionNavigator from "./QuestionNavigator";
 import CBTReviewScreen, { type ExamResult } from "./CBTReviewScreen";
-import { questionBank, type ExamConfig, type Question } from "@/lib/practice-data";
-
-function buildQuestions(config: ExamConfig): Question[] {
-  const pool =
-    config.subject === "All subjects"
-      ? questionBank
-      : questionBank.filter((q) => q.subject === config.subject);
-  return pool.slice(0, Math.max(1, Math.min(config.questionCount, pool.length)));
-}
+import { CbtApi } from "@/services/cbt.api";
+import type { ExamConfig, Question } from "@/lib/practice-data";
 
 function formatClock(seconds: number) {
   const m = Math.floor(seconds / 60)
@@ -23,8 +16,15 @@ function formatClock(seconds: number) {
   return `${m}:${s}`;
 }
 
-export default function CBTExamClient({ config, onExit }: { config: ExamConfig; onExit: () => void }) {
-  const questions = useMemo(() => buildQuestions(config), [config]);
+export default function CBTExamClient({
+  config,
+  questions,
+  onExit,
+}: {
+  config: ExamConfig;
+  questions: Question[];
+  onExit: () => void;
+}) {
   const totalSeconds = config.durationMinutes * 60;
 
   const [index, setIndex] = useState(0);
@@ -69,13 +69,9 @@ export default function CBTExamClient({ config, onExit }: { config: ExamConfig; 
       else if (chosen === q.correctIndex) correct += 1;
       else wrong += 1;
     });
-    setResult({
-      correct,
-      wrong,
-      skipped,
-      total: questions.length,
-      timeTakenSeconds: totalSeconds - timeLeft,
-    });
+    const timeTakenSeconds = totalSeconds - timeLeft;
+    setResult({ correct, wrong, skipped, total: questions.length, timeTakenSeconds });
+    CbtApi.submitExam({ examId: config.id, answers, timeTakenSeconds }).catch(() => {});
   }
 
   if (result) {

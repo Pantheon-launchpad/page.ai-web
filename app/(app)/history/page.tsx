@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { learningHistory } from "@/lib/progress-data";
+import { HistoryApi } from "@/services/history.api";
 
 export const metadata: Metadata = { title: "Learning History - Page.AI" };
 
-export default function LearningHistoryPage() {
+export default async function LearningHistoryPage() {
+  const learningHistory = await HistoryApi.getHistory();
   const groups = Array.from(new Set(learningHistory.map((h) => h.group)));
 
   return (

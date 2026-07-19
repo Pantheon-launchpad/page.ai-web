@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { Icon } from "@/components/dashboard/icons";
 import ChatPanel, { type ChatChip } from "./ChatPanel";
-import {
-  chatSources,
-  bookPersonas,
-  bookGameChips,
-  type ChatSource,
-} from "@/lib/learn-data";
+import { ChatApi } from "@/services/chat.api";
+import { bookPersonas, bookGameChips, type ChatSource } from "@/lib/learn-data";
 
-export default function ChatWithBookClient() {
+export default function ChatWithBookClient({
+  sources,
+}: {
+  sources: ChatSource[];
+}) {
   const [source, setSource] = useState<ChatSource | null>(null);
 
   if (!source) {
@@ -25,7 +25,7 @@ export default function ChatWithBookClient() {
         </p>
 
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {chatSources.map((s) => (
+          {sources.map((s) => (
             <button
               key={s.id}
               onClick={() => setSource(s)}
@@ -92,8 +92,9 @@ export default function ChatWithBookClient() {
           },
         ]}
         chips={chips}
-        cannedReplies={{}}
-        defaultReply="Good question. Give me a moment to find that in the chapter - meanwhile, tell me: do you want the short version or the deep dive?"
+        onSend={(message) =>
+          ChatApi.sendMessage(source.id, message).then((r) => r.reply)
+        }
       />
     </div>
   );

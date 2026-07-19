@@ -1,4 +1,4 @@
-import { student } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 import { Icon } from "./icons";
 
 function StatCard({
@@ -31,7 +31,8 @@ function StatCard({
   );
 }
 
-export default function StatsRow() {
+export default async function StatsRow() {
+  const { student } = await DashboardApi.getDashboard();
   const goalPercent = Math.min(100, Math.round((student.studyMinutesToday / student.studyGoalMinutes) * 100));
   const levelPercent = Math.round((student.coinsIntoLevel / student.coinsForNextLevel) * 100);
 

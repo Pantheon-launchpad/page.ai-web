@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { weakAreas } from "@/lib/progress-data";
+import { ProgressApi } from "@/services/progress.api";
 
 export const metadata: Metadata = { title: "Weak Areas - Page.AI" };
 
-export default function WeakAreasPage() {
+export default async function WeakAreasPage() {
+  const weakAreas = await ProgressApi.getWeakAreas();
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader

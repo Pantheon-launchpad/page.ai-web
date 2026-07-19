@@ -1,21 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import PageHeader from "@/components/learn/PageHeader";
 import SettingsSection from "@/components/settings/SettingsSection";
 import SettingsRow from "@/components/settings/SettingsRow";
 import Toggle from "@/components/ui/Toggle";
 import { Icon } from "@/components/dashboard/icons";
+import { SettingsApi, type AppSettings } from "@/services/settings.api";
+import { UserApi } from "@/services/user.api";
 
 export default function SettingsPage() {
   const router = useRouter();
-  const [dailyReminder, setDailyReminder] = useState(true);
-  const [streakAlerts, setStreakAlerts] = useState(true);
-  const [aiTips, setAiTips] = useState(false);
-  const [timedByDefault, setTimedByDefault] = useState(false);
-  const [downloadOnWifi, setDownloadOnWifi] = useState(true);
+  const [settings, setSettings] = useState<AppSettings | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  useEffect(() => {
+    SettingsApi.getSettings().then(setSettings);
+  }, []);
+
+  function update<K extends keyof AppSettings>(key: K, value: AppSettings[K]) {
+    setSettings((prev) => (prev ? { ...prev, [key]: value } : prev));
+    SettingsApi.updateSettings({ [key]: value }).catch(() => {});
+  }
+
+  async function handleDeleteAccount() {
+    setConfirmDelete(false);
+    await UserApi.deleteAccount();
+    router.push("/");
+  }
+
+  if (!settings) return null;
 
   return (
     <div className="flex flex-col gap-6">
@@ -25,17 +40,17 @@ export default function SettingsPage() {
         <SettingsRow
           label="Daily study reminder"
           description="A nudge at your usual study time."
-          control={<Toggle checked={dailyReminder} onChange={setDailyReminder} />}
+          control={<Toggle checked={settings.dailyReminder} onChange={(v) => update("dailyReminder", v)} />}
         />
         <SettingsRow
           label="Streak alerts"
           description="Warn me before my streak is about to break."
-          control={<Toggle checked={streakAlerts} onChange={setStreakAlerts} />}
+          control={<Toggle checked={settings.streakAlerts} onChange={(v) => update("streakAlerts", v)} />}
         />
         <SettingsRow
           label="AI tips & recommendations"
           description="Occasional nudges from Lumo based on your progress."
-          control={<Toggle checked={aiTips} onChange={setAiTips} />}
+          control={<Toggle checked={settings.aiTips} onChange={(v) => update("aiTips", v)} />}
         />
       </SettingsSection>
 
@@ -43,12 +58,12 @@ export default function SettingsPage() {
         <SettingsRow
           label="Timed mode by default"
           description="Start Practice Mode sessions with a soft timer on."
-          control={<Toggle checked={timedByDefault} onChange={setTimedByDefault} />}
+          control={<Toggle checked={settings.timedByDefault} onChange={(v) => update("timedByDefault", v)} />}
         />
         <SettingsRow
           label="Download new content on Wi-Fi only"
           description="Avoid using mobile data for subjects and model updates."
-          control={<Toggle checked={downloadOnWifi} onChange={setDownloadOnWifi} />}
+          control={<Toggle checked={settings.downloadOnWifi} onChange={(v) => update("downloadOnWifi", v)} />}
         />
       </SettingsSection>
 
@@ -109,10 +124,7 @@ export default function SettingsPage() {
                 Cancel
               </button>
               <button
-                onClick={() => {
-                  setConfirmDelete(false);
-                  router.push("/");
-                }}
+                onClick={handleDeleteAccount}
                 className="flex-1 rounded-full bg-ember py-2.5 text-sm font-medium text-white"
               >
                 Delete anyway

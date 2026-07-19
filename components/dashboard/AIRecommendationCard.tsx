@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { aiRecommendation } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 import { Icon } from "./icons";
 
-export default function AIRecommendationCard() {
+export default async function AIRecommendationCard() {
+  const { aiRecommendation } = await DashboardApi.getDashboard();
+
   return (
     <div className="glass-card-deep rounded-3xl p-6">
       <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-white/60">

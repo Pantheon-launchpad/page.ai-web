@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { Icon } from "@/components/dashboard/icons";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { wallet, recentRewards, dailyMissions, referral } from "@/lib/rewards-data";
+import { WalletApi } from "@/services/wallet.api";
+import { ReferralApi } from "@/services/referral.api";
 
-export default function RewardsSection() {
-  const tasksAvailable = dailyMissions.filter((m) => m.progress < m.goal).length;
+export default async function RewardsSection() {
+  const [wallet, missions, recentRewards, { referral }] = await Promise.all([
+    WalletApi.getWallet(),
+    WalletApi.getMissions(),
+    WalletApi.getRecentRewards(),
+    ReferralApi.getReferralSummary(),
+  ]);
+  const tasksAvailable = missions.filter((m) => m.progress < m.goal).length;
 
   return (
     <div className="glass-card-deep rounded-3xl p-6">

@@ -4,18 +4,17 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/dashboard/icons";
 import AIExplanationPanel from "@/components/practice/AIExplanationPanel";
-import { mistakesWithQuestions } from "@/lib/mistakes-data";
 import { subjectList } from "@/lib/practice-data";
+import type { mistakesWithQuestions } from "@/lib/mistakes-data";
 
-export default function MistakeBookClient() {
+export default function MistakeBookClient({ mistakes }: { mistakes: ReturnType<typeof mistakesWithQuestions> }) {
   const router = useRouter();
   const [subjectFilter, setSubjectFilter] = useState("All subjects");
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  const all = useMemo(() => mistakesWithQuestions(), []);
   const filtered = useMemo(
-    () => all.filter((m) => subjectFilter === "All subjects" || m.question.subject === subjectFilter),
-    [all, subjectFilter]
+    () => mistakes.filter((m) => subjectFilter === "All subjects" || m.question.subject === subjectFilter),
+    [mistakes, subjectFilter]
   );
 
   return (

@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { Icon } from "@/components/dashboard/icons";
 import { accent } from "./colors";
+import { FlashcardApi, type ReviewRating } from "@/services/flashcard.api";
 import type { FlashcardDeck } from "@/lib/learn-data";
 
-const ratings = [
-  { label: "Again", days: "10m", tone: "bg-ember-soft text-ember" },
-  { label: "Hard", days: "1d", tone: "bg-ember-soft text-ember" },
-  { label: "Good", days: "3d", tone: "bg-moss-soft text-moss" },
-  { label: "Easy", days: "7d", tone: "bg-moss-soft text-moss" },
-] as const;
+const ratings: { label: string; value: ReviewRating; days: string; tone: string }[] = [
+  { label: "Again", value: "again", days: "10m", tone: "bg-ember-soft text-ember" },
+  { label: "Hard", value: "hard", days: "1d", tone: "bg-ember-soft text-ember" },
+  { label: "Good", value: "good", days: "3d", tone: "bg-moss-soft text-moss" },
+  { label: "Easy", value: "easy", days: "7d", tone: "bg-moss-soft text-moss" },
+];
 
 export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck; onExit: () => void }) {
   const [index, setIndex] = useState(0);
@@ -21,9 +22,10 @@ export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck;
   const card = deck.cards[index % deck.cards.length];
   const done = reviewed >= deck.cards.length;
 
-  function rate() {
+  function rate(rating: ReviewRating) {
     setFlipped(false);
     setReviewed((n) => n + 1);
+    FlashcardApi.reviewCard(deck.id, card.id, rating).catch(() => {});
     setTimeout(() => setIndex((i) => i + 1), 180);
   }
 
@@ -87,7 +89,7 @@ export default function FlashcardReview({ deck, onExit }: { deck: FlashcardDeck;
           {ratings.map((r) => (
             <button
               key={r.label}
-              onClick={rate}
+              onClick={() => rate(r.value)}
               className={`flex flex-col items-center gap-0.5 rounded-xl py-2.5 text-xs font-semibold transition-transform hover:-translate-y-0.5 ${r.tone}`}
             >
               {r.label}

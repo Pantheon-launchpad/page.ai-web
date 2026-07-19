@@ -8,10 +8,10 @@ import AIExplanationPanel from "./AIExplanationPanel";
 import {
   questionsFor,
   topicsFor,
-  subjectList,
   type Difficulty,
   type Question,
 } from "@/lib/practice-data";
+import { PracticeApi } from "@/services/practice.api";
 
 type DifficultyChoice = Difficulty | "adaptive";
 
@@ -24,7 +24,20 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export default function PracticeFlowClient() {
+export default function PracticeFlowClient({
+  subjectList,
+}: {
+  subjectList: string[];
+}) {
+  // Note on architecture: `questionsFor`/`topicsFor` stay as direct, synchronous
+  // calls here rather than `PracticeApi.getQuestions()`/`getTopics()` (which
+  // also exist and wrap the exact same logic). Every keystroke/chip click in
+  // the config screen re-derives the pool for instant feedback - routing that
+  // through an async round trip would add a render-cycle of lag to what's
+  // currently free local filtering, for no real benefit while the dataset is
+  // small enough to hold client-side. Writes (recording an attempt, below) do
+  // go through the service layer, since that's the actual integration point
+  // a real backend needs.
   const [screen, setScreen] = useState<"config" | "session" | "summary">(
     "config",
   );
@@ -73,6 +86,7 @@ export default function PracticeFlowClient() {
     setLocked(true);
     setAnsweredCount((n) => n + 1);
     if (i === session[index].correctIndex) setCorrectCount((n) => n + 1);
+    PracticeApi.recordAttempt(session[index].id, i).catch(() => {});
   }
 
   function goNext(replacement?: Question) {

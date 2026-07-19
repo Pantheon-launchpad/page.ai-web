@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AuthCard from "@/components/auth/AuthCard";
 import AuthInput from "@/components/auth/AuthInput";
+import GoogleButton from "@/components/auth/GoogleButton";
+import AuthDivider from "@/components/auth/AuthDivider";
 import { Icon } from "@/components/dashboard/icons";
+import { AuthApi } from "@/services/auth.api";
+import { ApiError } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -14,7 +18,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const nextErrors: typeof errors = {};
     if (!/^\S+@\S+\.\S+$/.test(email)) nextErrors.email = "Enter a valid email address.";
@@ -23,7 +27,14 @@ export default function LoginPage() {
     if (Object.keys(nextErrors).length > 0) return;
 
     setLoading(true);
-    setTimeout(() => router.push("/dashboard"), 700);
+    try {
+      await AuthApi.login({ email, password });
+      router.push("/dashboard");
+    } catch (err) {
+      setLoading(false);
+      const message = err instanceof ApiError ? err.message : "Something went wrong. Try again.";
+      setErrors({ password: message });
+    }
   }
 
   return (
@@ -40,7 +51,12 @@ export default function LoginPage() {
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
+        <GoogleButton label="Log in with Google" />
+        <AuthDivider label="or log in with email" />
+      </div>
+
+      <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
         <AuthInput
           label="Email"
           type="email"

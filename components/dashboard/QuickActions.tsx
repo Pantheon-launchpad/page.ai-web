@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { quickActions } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 import { Icon } from "./icons";
 import { builtRoutes } from "./nav-data";
 
-export default function QuickActions() {
+export default async function QuickActions() {
+  const { quickActions } = await DashboardApi.getDashboard();
+
   return (
     <div className="glass-card rounded-3xl p-6">
       <h3 className="font-display text-[1.05rem] font-semibold text-ink">Quick actions</h3>

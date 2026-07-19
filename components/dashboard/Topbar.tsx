@@ -1,11 +1,18 @@
 "use client";
 
 import { Icon } from "./icons";
-import { student } from "@/lib/dashboard-data";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import ProfileMenu from "./ProfileMenu";
 
-export default function Topbar({ onMenu }: { onMenu: () => void }) {
+interface TopbarStudent {
+  name: string;
+  initials: string;
+  coins: number;
+  level: number;
+  streak: number;
+}
+
+export default function Topbar({ onMenu, student }: { onMenu: () => void; student: TopbarStudent }) {
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-ink/10 bg-paper/80 px-5 py-4 backdrop-blur-xl md:px-8">
       <button
@@ -41,7 +48,7 @@ export default function Topbar({ onMenu }: { onMenu: () => void }) {
           <Icon name="coin" className="h-4 w-4" />
           {student.coins.toLocaleString()}
         </a>
-        <ProfileMenu />
+        <ProfileMenu student={student} />
       </div>
     </header>
   );

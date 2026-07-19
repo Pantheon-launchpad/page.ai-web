@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import ExamPicker from "@/components/cbt/ExamPicker";
-import { mockExams } from "@/lib/practice-data";
+import { CbtApi } from "@/services/cbt.api";
 
 export const metadata: Metadata = { title: "Mock Exams - Page.AI" };
 
-export default function MockExamsPage() {
+export default async function MockExamsPage() {
+  const mockExams = await CbtApi.getMockExams();
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader

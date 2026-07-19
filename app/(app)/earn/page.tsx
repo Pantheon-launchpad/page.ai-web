@@ -6,17 +6,19 @@ import MissionsCard from "@/components/rewards/MissionsCard";
 import StoreItemCard from "@/components/rewards/StoreItemCard";
 import TransactionList from "@/components/rewards/TransactionList";
 import { accent } from "@/components/learn/colors";
-import {
-  dailyMissions,
-  wallet,
-  storeItems,
-  coinsByCategory,
-  transactions,
-} from "@/lib/rewards-data";
+import { WalletApi } from "@/services/wallet.api";
 
 export const metadata: Metadata = { title: "Earn - Page.AI" };
 
-export default function EarnPage() {
+export default async function EarnPage() {
+  const [dailyMissions, wallet, storeItems, coinsByCategory, transactions] =
+    await Promise.all([
+      WalletApi.getMissions(),
+      WalletApi.getWallet(),
+      WalletApi.getStoreItems(),
+      WalletApi.getCoinsByCategory(),
+      WalletApi.getTransactions(),
+    ]);
   const totalCategoryCoins =
     coinsByCategory.reduce((sum, c) => sum + c.coins, 0) || 1;
 

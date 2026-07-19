@@ -5,6 +5,8 @@ import Link from "next/link";
 import AuthCard from "@/components/auth/AuthCard";
 import AuthInput from "@/components/auth/AuthInput";
 import { Icon } from "@/components/dashboard/icons";
+import { AuthApi } from "@/services/auth.api";
+import { ApiError } from "@/lib/api";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -12,18 +14,18 @@ export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Enter a valid email address.");
-      return;
-    }
     setError(undefined);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await AuthApi.requestPasswordReset(email);
       setSent(true);
-    }, 700);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

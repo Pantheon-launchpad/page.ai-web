@@ -3,15 +3,21 @@
 import { useState } from "react";
 import PageHeader from "@/components/learn/PageHeader";
 import { Icon } from "@/components/dashboard/icons";
-import { downloadedItems, storageTotalMB } from "@/lib/settings-data";
+import { useApi } from "@/hooks/useApi";
+import { DownloadsApi } from "@/services/downloads.api";
 
 export default function DownloadsPage() {
-  const [items, setItems] = useState(downloadedItems);
+  const { data } = useApi(() => DownloadsApi.getDownloads(), []);
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+
+  const items = (data?.items ?? []).filter((i) => !removedIds.has(i.id));
+  const storageTotalMB = data?.storageTotalMB ?? 0;
   const used = items.reduce((sum, i) => sum + i.size, 0);
-  const percent = Math.min(100, Math.round((used / storageTotalMB) * 100));
+  const percent = storageTotalMB ? Math.min(100, Math.round((used / storageTotalMB) * 100)) : 0;
 
   function remove(id: string) {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+    setRemovedIds((prev) => new Set(prev).add(id));
+    DownloadsApi.removeDownload(id).catch(() => {});
   }
 
   return (

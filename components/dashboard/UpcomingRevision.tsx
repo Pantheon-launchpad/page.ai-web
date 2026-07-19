@@ -1,7 +1,9 @@
-import { upcomingRevision } from "@/lib/dashboard-data";
+import { DashboardApi } from "@/services/dashboard.api";
 import { Icon } from "./icons";
 
-export default function UpcomingRevision() {
+export default async function UpcomingRevision() {
+  const { upcomingRevision } = await DashboardApi.getDashboard();
+
   return (
     <div className="glass-card rounded-3xl p-6">
       <div className="flex items-center justify-between">

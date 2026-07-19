@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/learn/PageHeader";
 import ChatWithBookClient from "@/components/learn/ChatWithBookClient";
+import { ChatApi } from "@/services/chat.api";
 
 export const metadata: Metadata = { title: "Chat with Book - Page.AI" };
 
-export default function ChatWithBookPage() {
+export default async function ChatWithBookPage() {
+  const sources = await ChatApi.getSources();
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
@@ -13,7 +16,7 @@ export default function ChatWithBookPage() {
         title="Chat with Book"
         description="Not another chatbot - a conversation with the actual material, in whatever voice helps it click."
       />
-      <ChatWithBookClient />
+      <ChatWithBookClient sources={sources} />
     </div>
   );
 }

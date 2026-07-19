@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Icon } from "@/components/dashboard/icons";
 import CBTExamClient from "./CBTExamClient";
-import type { ExamConfig } from "@/lib/practice-data";
+import { CbtApi } from "@/services/cbt.api";
+import type { ExamConfig, Question } from "@/lib/practice-data";
 
 const boardTone: Record<ExamConfig["board"], string> = {
   WAEC: "bg-signal-soft text-signal-deep",
@@ -13,9 +14,28 @@ const boardTone: Record<ExamConfig["board"], string> = {
 
 export default function ExamPicker({ exams }: { exams: ExamConfig[] }) {
   const [active, setActive] = useState<ExamConfig | null>(null);
+  const [activeQuestions, setActiveQuestions] = useState<Question[]>([]);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
+  async function startExam(exam: ExamConfig) {
+    setLoadingId(exam.id);
+    const questions = await CbtApi.getExamQuestions(exam);
+    setActiveQuestions(questions);
+    setActive(exam);
+    setLoadingId(null);
+  }
 
   if (active) {
-    return <CBTExamClient config={active} onExit={() => setActive(null)} />;
+    return (
+      <CBTExamClient
+        config={active}
+        questions={activeQuestions}
+        onExit={() => {
+          setActive(null);
+          setActiveQuestions([]);
+        }}
+      />
+    );
   }
 
   return (
@@ -38,11 +58,12 @@ export default function ExamPicker({ exams }: { exams: ExamConfig[] }) {
           </p>
 
           <button
-            onClick={() => setActive(exam)}
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-cta py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep"
+            onClick={() => startExam(exam)}
+            disabled={loadingId === exam.id}
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-cta py-2.5 text-sm font-medium text-cta-text transition-transform hover:-translate-y-0.5 hover:bg-signal-deep disabled:opacity-60"
           >
             <Icon name="play" className="h-4 w-4" />
-            Start exam
+            {loadingId === exam.id ? "Loading..." : "Start exam"}
           </button>
         </div>
       ))}
