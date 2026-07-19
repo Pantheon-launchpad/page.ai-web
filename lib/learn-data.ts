@@ -11,82 +11,15 @@ export type Subject = {
 };
 
 export const subjects: Subject[] = [
-  {
-    id: "physics",
-    name: "Physics",
-    icon: "target",
-    color: "signal",
-    progress: 68,
-    mastery: 74,
-    topics: 22,
-    topicsDone: 15,
-    hoursSpent: 19.5,
-  },
-  {
-    id: "chemistry",
-    name: "Chemistry",
-    icon: "sparkle",
-    color: "ember",
-    progress: 41,
-    mastery: 52,
-    topics: 20,
-    topicsDone: 8,
-    hoursSpent: 11,
-  },
-  {
-    id: "biology",
-    name: "Biology",
-    icon: "book",
-    color: "moss",
-    progress: 77,
-    mastery: 81,
-    topics: 24,
-    topicsDone: 18,
-    hoursSpent: 24,
-  },
-  {
-    id: "mathematics",
-    name: "Mathematics",
-    icon: "target",
-    color: "signal",
-    progress: 55,
-    mastery: 60,
-    topics: 30,
-    topicsDone: 16,
-    hoursSpent: 27.5,
-  },
-  {
-    id: "english",
-    name: "English Language",
-    icon: "chat",
-    color: "ember",
-    progress: 63,
-    mastery: 70,
-    topics: 18,
-    topicsDone: 11,
-    hoursSpent: 14,
-  },
-  {
-    id: "geography",
-    name: "Geography",
-    icon: "library",
-    color: "moss",
-    progress: 30,
-    mastery: 38,
-    topics: 16,
-    topicsDone: 5,
-    hoursSpent: 6.5,
-  },
+  { id: "physics", name: "Physics", icon: "target", color: "signal", progress: 68, mastery: 74, topics: 22, topicsDone: 15, hoursSpent: 19.5 },
+  { id: "chemistry", name: "Chemistry", icon: "sparkle", color: "ember", progress: 41, mastery: 52, topics: 20, topicsDone: 8, hoursSpent: 11 },
+  { id: "biology", name: "Biology", icon: "book", color: "moss", progress: 77, mastery: 81, topics: 24, topicsDone: 18, hoursSpent: 24 },
+  { id: "mathematics", name: "Mathematics", icon: "target", color: "signal", progress: 55, mastery: 60, topics: 30, topicsDone: 16, hoursSpent: 27.5 },
+  { id: "english", name: "English Language", icon: "chat", color: "ember", progress: 63, mastery: 70, topics: 18, topicsDone: 11, hoursSpent: 14 },
+  { id: "geography", name: "Geography", icon: "library", color: "moss", progress: 30, mastery: 38, topics: 16, topicsDone: 5, hoursSpent: 6.5 },
 ];
 
-export type ResourceType =
-  | "notes"
-  | "past-questions"
-  | "formula"
-  | "definitions"
-  | "reference"
-  | "pdf"
-  | "cheat-sheet";
+export type ResourceType = "notes" | "past-questions" | "formula" | "definitions" | "reference" | "pdf" | "cheat-sheet";
 
 export const resourceTypeLabels: Record<ResourceType, string> = {
   notes: "Curriculum Notes",
@@ -108,137 +41,29 @@ export type Resource = {
 };
 
 export const resources: Resource[] = [
-  {
-    id: "r1",
-    title: "Waves & Optics - Full Notes",
-    subject: "Physics",
-    type: "notes",
-    size: "2.1 MB",
-    bookmarked: true,
-  },
-  {
-    id: "r2",
-    title: "WAEC Physics 2019–2023",
-    subject: "Physics",
-    type: "past-questions",
-    size: "4.6 MB",
-    bookmarked: false,
-  },
-  {
-    id: "r3",
-    title: "Organic Chemistry Formula Sheet",
-    subject: "Chemistry",
-    type: "formula",
-    size: "540 KB",
-    bookmarked: true,
-  },
-  {
-    id: "r4",
-    title: "Periodic Table & Trends",
-    subject: "Chemistry",
-    type: "cheat-sheet",
-    size: "310 KB",
-    bookmarked: false,
-  },
-  {
-    id: "r5",
-    title: "Cell Biology Definitions",
-    subject: "Biology",
-    type: "definitions",
-    size: "180 KB",
-    bookmarked: false,
-  },
-  {
-    id: "r6",
-    title: "JAMB Biology Past Questions",
-    subject: "Biology",
-    type: "past-questions",
-    size: "3.8 MB",
-    bookmarked: true,
-  },
-  {
-    id: "r7",
-    title: "Quadratic Equations Reference",
-    subject: "Mathematics",
-    type: "reference",
-    size: "260 KB",
-    bookmarked: false,
-  },
-  {
-    id: "r8",
-    title: "Trigonometry Formula Sheet",
-    subject: "Mathematics",
-    type: "formula",
-    size: "220 KB",
-    bookmarked: false,
-  },
-  {
-    id: "r9",
-    title: "Comprehension & Summary Guide",
-    subject: "English",
-    type: "notes",
-    size: "1.4 MB",
-    bookmarked: false,
-  },
-  {
-    id: "r10",
-    title: "WAEC English 2020 Past Paper",
-    subject: "English",
-    type: "pdf",
-    size: "1.9 MB",
-    bookmarked: false,
-  },
-  {
-    id: "r11",
-    title: "Map Reading Cheat Sheet",
-    subject: "Geography",
-    type: "cheat-sheet",
-    size: "410 KB",
-    bookmarked: false,
-  },
-  {
-    id: "r12",
-    title: "Climate Zones - Full Notes",
-    subject: "Geography",
-    type: "notes",
-    size: "2.3 MB",
-    bookmarked: false,
-  },
+  { id: "r1", title: "Waves & Optics - Full Notes", subject: "Physics", type: "notes", size: "2.1 MB", bookmarked: true },
+  { id: "r2", title: "WAEC Physics 2019–2023", subject: "Physics", type: "past-questions", size: "4.6 MB", bookmarked: false },
+  { id: "r3", title: "Organic Chemistry Formula Sheet", subject: "Chemistry", type: "formula", size: "540 KB", bookmarked: true },
+  { id: "r4", title: "Periodic Table & Trends", subject: "Chemistry", type: "cheat-sheet", size: "310 KB", bookmarked: false },
+  { id: "r5", title: "Cell Biology Definitions", subject: "Biology", type: "definitions", size: "180 KB", bookmarked: false },
+  { id: "r6", title: "JAMB Biology Past Questions", subject: "Biology", type: "past-questions", size: "3.8 MB", bookmarked: true },
+  { id: "r7", title: "Quadratic Equations Reference", subject: "Mathematics", type: "reference", size: "260 KB", bookmarked: false },
+  { id: "r8", title: "Trigonometry Formula Sheet", subject: "Mathematics", type: "formula", size: "220 KB", bookmarked: false },
+  { id: "r9", title: "Comprehension & Summary Guide", subject: "English", type: "notes", size: "1.4 MB", bookmarked: false },
+  { id: "r10", title: "WAEC English 2020 Past Paper", subject: "English", type: "pdf", size: "1.9 MB", bookmarked: false },
+  { id: "r11", title: "Map Reading Cheat Sheet", subject: "Geography", type: "cheat-sheet", size: "410 KB", bookmarked: false },
+  { id: "r12", title: "Climate Zones - Full Notes", subject: "Geography", type: "notes", size: "2.3 MB", bookmarked: false },
 ];
 
 // --- AI Tutor -------------------------------------------------------------
 
 export const tutorCapabilities = [
-  {
-    label: "Explain a topic",
-    icon: "tutor" as const,
-    prompt: "Explain Waves to me",
-  },
-  {
-    label: "Simplify a topic",
-    icon: "sparkle" as const,
-    prompt: "Simplify Newton's Laws for me",
-  },
-  {
-    label: "Summarise my notes",
-    icon: "book" as const,
-    prompt: "Summarise my Chemistry notes on bonding",
-  },
-  {
-    label: "Generate a quiz",
-    icon: "exam" as const,
-    prompt: "Quiz me on Cell Biology",
-  },
-  {
-    label: "Generate mnemonics",
-    icon: "star" as const,
-    prompt: "Give me a mnemonic for the noble gases",
-  },
-  {
-    label: "Exam tips",
-    icon: "target" as const,
-    prompt: "Give me exam tips for WAEC Physics",
-  },
+  { label: "Explain a topic", icon: "tutor" as const, prompt: "Explain Waves to me" },
+  { label: "Simplify a topic", icon: "sparkle" as const, prompt: "Simplify Newton's Laws for me" },
+  { label: "Summarise my notes", icon: "book" as const, prompt: "Summarise my Chemistry notes on bonding" },
+  { label: "Generate a quiz", icon: "exam" as const, prompt: "Quiz me on Cell Biology" },
+  { label: "Generate mnemonics", icon: "star" as const, prompt: "Give me a mnemonic for the noble gases" },
+  { label: "Exam tips", icon: "target" as const, prompt: "Give me exam tips for WAEC Physics" },
 ];
 
 export const tutorExamplePrompts = [
@@ -271,30 +96,10 @@ export type ChatSource = {
 };
 
 export const chatSources: ChatSource[] = [
-  {
-    id: "physics-textbook",
-    title: "New School Physics",
-    subject: "Physics",
-    chapters: 18,
-  },
-  {
-    id: "chem-textbook",
-    title: "Comprehensive Chemistry",
-    subject: "Chemistry",
-    chapters: 22,
-  },
-  {
-    id: "bio-textbook",
-    title: "Modern Biology",
-    subject: "Biology",
-    chapters: 26,
-  },
-  {
-    id: "my-notes",
-    title: "My Uploaded Notes - Waves.pdf",
-    subject: "Physics",
-    chapters: 1,
-  },
+  { id: "physics-textbook", title: "New School Physics", subject: "Physics", chapters: 18 },
+  { id: "chem-textbook", title: "Comprehensive Chemistry", subject: "Chemistry", chapters: 22 },
+  { id: "bio-textbook", title: "Modern Biology", subject: "Biology", chapters: 26 },
+  { id: "my-notes", title: "My Uploaded Notes - Waves.pdf", subject: "Physics", chapters: 1 },
 ];
 
 export const bookPersonas = [
@@ -337,26 +142,10 @@ export const flashcardDecks: FlashcardDeck[] = [
     dueToday: 6,
     total: 24,
     cards: [
-      {
-        id: "c1",
-        front: "What is the SI unit of frequency?",
-        back: "Hertz (Hz) - one cycle per second.",
-      },
-      {
-        id: "c2",
-        front: "Define wavelength.",
-        back: "The distance between two consecutive identical points on a wave, e.g. crest to crest.",
-      },
-      {
-        id: "c3",
-        front: "Speed of sound in air (approx.)",
-        back: "About 343 m/s at room temperature.",
-      },
-      {
-        id: "c4",
-        front: "What type of wave is light?",
-        back: "A transverse electromagnetic wave - it doesn't need a medium to travel.",
-      },
+      { id: "c1", front: "What is the SI unit of frequency?", back: "Hertz (Hz) - one cycle per second." },
+      { id: "c2", front: "Define wavelength.", back: "The distance between two consecutive identical points on a wave, e.g. crest to crest." },
+      { id: "c3", front: "Speed of sound in air (approx.)", back: "About 343 m/s at room temperature." },
+      { id: "c4", front: "What type of wave is light?", back: "A transverse electromagnetic wave - it doesn't need a medium to travel." },
     ],
   },
   {
@@ -367,21 +156,9 @@ export const flashcardDecks: FlashcardDeck[] = [
     dueToday: 4,
     total: 18,
     cards: [
-      {
-        id: "c1",
-        front: "What is an ionic bond?",
-        back: "An electrostatic attraction between oppositely charged ions, formed by electron transfer.",
-      },
-      {
-        id: "c2",
-        front: "What is a covalent bond?",
-        back: "A bond formed by two atoms sharing one or more pairs of electrons.",
-      },
-      {
-        id: "c3",
-        front: "Give an example of a giant covalent structure.",
-        back: "Diamond or graphite - both are forms of carbon.",
-      },
+      { id: "c1", front: "What is an ionic bond?", back: "An electrostatic attraction between oppositely charged ions, formed by electron transfer." },
+      { id: "c2", front: "What is a covalent bond?", back: "A bond formed by two atoms sharing one or more pairs of electrons." },
+      { id: "c3", front: "Give an example of a giant covalent structure.", back: "Diamond or graphite - both are forms of carbon." },
     ],
   },
   {
@@ -392,16 +169,8 @@ export const flashcardDecks: FlashcardDeck[] = [
     dueToday: 0,
     total: 30,
     cards: [
-      {
-        id: "c1",
-        front: "What is a transitive verb?",
-        back: "A verb that takes a direct object, e.g. 'She read the book.'",
-      },
-      {
-        id: "c2",
-        front: "Name the 3 degrees of comparison.",
-        back: "Positive, comparative, superlative - e.g. good, better, best.",
-      },
+      { id: "c1", front: "What is a transitive verb?", back: "A verb that takes a direct object, e.g. 'She read the book.'" },
+      { id: "c2", front: "Name the 3 degrees of comparison.", back: "Positive, comparative, superlative - e.g. good, better, best." },
     ],
   },
 ];
@@ -411,13 +180,7 @@ export const flashcardDecks: FlashcardDeck[] = [
 export const weeklyPlan = [
   { day: "Mon", subject: "Physics", topic: "Waves", done: true },
   { day: "Tue", subject: "Chemistry", topic: "Bonding", done: true },
-  {
-    day: "Wed",
-    subject: "Mathematics",
-    topic: "Quadratics",
-    done: false,
-    today: true,
-  },
+  { day: "Wed", subject: "Mathematics", topic: "Quadratics", done: false, today: true },
   { day: "Thu", subject: "Biology", topic: "Genetics", done: false },
   { day: "Fri", subject: "English", topic: "Comprehension", done: false },
   { day: "Sat", subject: "Geography", topic: "Climate", done: false },
@@ -427,12 +190,7 @@ export const weeklyPlan = [
 export const upcomingExams = [
   { id: "e1", name: "WAEC Mock - Physics", date: "3 Aug 2026", daysLeft: 18 },
   { id: "e2", name: "JAMB CBT - Full Mock", date: "22 Aug 2026", daysLeft: 37 },
-  {
-    id: "e3",
-    name: "School Exam - Chemistry",
-    date: "29 Jul 2026",
-    daysLeft: 13,
-  },
+  { id: "e3", name: "School Exam - Chemistry", date: "29 Jul 2026", daysLeft: 13 },
 ];
 
 export const plannerRecommendations = [

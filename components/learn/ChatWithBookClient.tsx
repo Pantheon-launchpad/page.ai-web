@@ -6,22 +6,15 @@ import ChatPanel, { type ChatChip } from "./ChatPanel";
 import { ChatApi } from "@/services/chat.api";
 import { bookPersonas, bookGameChips, type ChatSource } from "@/lib/learn-data";
 
-export default function ChatWithBookClient({
-  sources,
-}: {
-  sources: ChatSource[];
-}) {
+export default function ChatWithBookClient({ sources }: { sources: ChatSource[] }) {
   const [source, setSource] = useState<ChatSource | null>(null);
 
   if (!source) {
     return (
       <div className="glass-card rounded-3xl p-6 sm:p-7">
-        <h2 className="font-display text-lg font-semibold text-ink">
-          Choose what to talk to
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-ink">Choose what to talk to</h2>
         <p className="mt-1 text-sm text-ink-soft">
-          Pick a textbook, chapter, or your own uploaded notes. The AI takes on
-          that material&apos;s voice.
+          Pick a textbook, chapter, or your own uploaded notes. The AI takes on that material&apos;s voice.
         </p>
 
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -35,12 +28,9 @@ export default function ChatWithBookClient({
                 <Icon name="layers" className="h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-ink">
-                  {s.title}
-                </p>
+                <p className="truncate text-sm font-semibold text-ink">{s.title}</p>
                 <p className="text-xs text-ink-soft">
-                  {s.subject} &middot; {s.chapters}{" "}
-                  {s.chapters === 1 ? "chapter" : "chapters"}
+                  {s.subject} &middot; {s.chapters} {s.chapters === 1 ? "chapter" : "chapters"}
                 </p>
               </div>
             </button>
@@ -48,9 +38,7 @@ export default function ChatWithBookClient({
 
           <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-ink/20 bg-surface-2 p-4 text-center text-ink-faint transition-colors hover:border-signal/40 hover:text-signal-deep">
             <Icon name="pdf" className="h-6 w-6" />
-            <span className="text-xs font-medium">
-              Upload a PDF or textbook
-            </span>
+            <span className="text-xs font-medium">Upload a PDF or textbook</span>
             <input type="file" accept="application/pdf" className="hidden" />
           </label>
         </div>
@@ -92,9 +80,7 @@ export default function ChatWithBookClient({
           },
         ]}
         chips={chips}
-        onSend={(message) =>
-          ChatApi.sendMessage(source.id, message).then((r) => r.reply)
-        }
+        onSend={(message) => ChatApi.sendMessage(source.id, message).then((r) => r.reply)}
       />
     </div>
   );

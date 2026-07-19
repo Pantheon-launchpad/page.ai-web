@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { WalletApi } from "@/services/wallet.api";
 
 interface WalletState {
@@ -47,11 +41,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     refresh();
   }, [refresh]);
 
-  return (
-    <WalletContext.Provider value={{ wallet, loading, refresh }}>
-      {children}
-    </WalletContext.Provider>
-  );
+  return <WalletContext.Provider value={{ wallet, loading, refresh }}>{children}</WalletContext.Provider>;
 }
 
 export function useWallet() {

@@ -42,7 +42,7 @@ export default function ThemeNudge() {
             if (cancelled) return;
             window.localStorage.setItem(STORAGE_WELCOME, "1");
             show(WELCOME_MESSAGE, 9000);
-          }, 1800),
+          }, 1800)
         );
         return () => {
           cancelled = true;
@@ -59,7 +59,7 @@ export default function ThemeNudge() {
             if (cancelled) return;
             window.localStorage.setItem(STORAGE_HOURS_SEEN, "1");
             show(HOURS_MESSAGE, 10000);
-          }, remaining),
+          }, remaining)
         );
       }
     } catch {
@@ -89,10 +89,7 @@ export default function ThemeNudge() {
     <div className="absolute right-0 top-full z-40 mt-3 w-[19rem] max-w-[85vw]">
       {/* thought-bubble tail, trailing up toward the toggle */}
       <span className="animate-float-sm absolute -top-3 right-8 h-2.5 w-2.5 rounded-full bg-ember-soft" />
-      <span
-        className="animate-float-sm absolute -top-6 right-11 h-1.5 w-1.5 rounded-full bg-ember-soft"
-        style={{ animationDelay: "0.3s" }}
-      />
+      <span className="animate-float-sm absolute -top-6 right-11 h-1.5 w-1.5 rounded-full bg-ember-soft" style={{ animationDelay: "0.3s" }} />
 
       <div className="glass-card animate-pop-in relative rounded-[28px] p-4">
         <button
@@ -108,9 +105,7 @@ export default function ThemeNudge() {
             <Icon name="lumo" className="h-4 w-4" />
           </span>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
-              Lumo
-            </p>
+            <p className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">Lumo</p>
             <p className="mt-1 text-sm leading-relaxed text-ink">{message}</p>
           </div>
         </div>

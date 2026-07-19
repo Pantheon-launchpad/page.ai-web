@@ -1,12 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosInstance } from "axios";
-import {
-  API_BASE_URL,
-  API_TIMEOUT_MS,
-  API_MODE,
-  MOCK_LATENCY_MS,
-  TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY,
-} from "./config";
+import { API_BASE_URL, API_TIMEOUT_MS, API_MODE, MOCK_LATENCY_MS, TOKEN_STORAGE_KEY, REFRESH_TOKEN_STORAGE_KEY } from "./config";
 import { ApiError } from "./errors";
 
 // --- token storage (swap for httpOnly cookies server-side once the real
@@ -34,8 +27,7 @@ export const tokenStore = {
     if (typeof window === "undefined") return;
     try {
       window.localStorage.setItem(TOKEN_STORAGE_KEY, accessToken);
-      if (refreshToken)
-        window.localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, refreshToken);
+      if (refreshToken) window.localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, refreshToken);
     } catch {
       // ignore - storage unavailable
     }
@@ -99,23 +91,13 @@ async function refreshAccessToken(): Promise<string | null> {
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    const original = error.config as
-      | (AxiosRequestConfig & { _retried?: boolean })
-      | undefined;
+    const original = error.config as (AxiosRequestConfig & { _retried?: boolean }) | undefined;
 
-    if (
-      error.response?.status === 401 &&
-      original &&
-      !original._retried &&
-      API_MODE === "production"
-    ) {
+    if (error.response?.status === 401 && original && !original._retried && API_MODE === "production") {
       original._retried = true;
       const newToken = await refreshAccessToken();
       if (newToken) {
-        original.headers = {
-          ...original.headers,
-          Authorization: `Bearer ${newToken}`,
-        };
+        original.headers = { ...original.headers, Authorization: `Bearer ${newToken}` };
         return axiosClient.request(original);
       }
     }
@@ -127,37 +109,22 @@ axiosClient.interceptors.response.use(
       throw new ApiError("Request timed out", "TIMEOUT");
     }
     if (!error.response) {
-      throw new ApiError(
-        "Network error - check your connection",
-        "NETWORK_ERROR",
-      );
+      throw new ApiError("Network error - check your connection", "NETWORK_ERROR");
     }
 
     const status = error.response.status;
     const data = error.response.data as { message?: string } | undefined;
-    throw ApiError.fromStatus(
-      status,
-      data?.message ?? error.message,
-      error.response.data,
-    );
-  },
+    throw ApiError.fromStatus(status, data?.message ?? error.message, error.response.data);
+  }
 );
 
 // --- retry helper for idempotent GETs ---------------------------------------
 
-async function withRetry<T>(
-  fn: () => Promise<T>,
-  retries = 2,
-  delayMs = 400,
-): Promise<T> {
+async function withRetry<T>(fn: () => Promise<T>, retries = 2, delayMs = 400): Promise<T> {
   try {
     return await fn();
   } catch (err) {
-    if (
-      retries <= 0 ||
-      (err instanceof ApiError &&
-        ["UNAUTHORIZED", "FORBIDDEN", "VALIDATION_ERROR"].includes(err.code))
-    ) {
+    if (retries <= 0 || (err instanceof ApiError && ["UNAUTHORIZED", "FORBIDDEN", "VALIDATION_ERROR"].includes(err.code))) {
       throw err;
     }
     await new Promise((r) => setTimeout(r, delayMs));
@@ -169,24 +136,15 @@ async function withRetry<T>(
 
 /** Resolves `data` after MOCK_LATENCY_MS, simulating a real round trip so
  *  loading states behave the same way they will against the real API. */
-export function mockResponse<T>(
-  data: T,
-  latency = MOCK_LATENCY_MS,
-): Promise<T> {
+export function mockResponse<T>(data: T, latency = MOCK_LATENCY_MS): Promise<T> {
   if (latency <= 0) return Promise.resolve(data);
   return new Promise((resolve) => setTimeout(() => resolve(data), latency));
 }
 
 /** Simulates a mock-mode failure, for exercising error states in the UI
  *  during development (e.g. `mockFailure("Email already in use")`). */
-export function mockFailure(
-  message: string,
-  code: ApiError["code"] = "VALIDATION_ERROR",
-  latency = MOCK_LATENCY_MS,
-): Promise<never> {
-  return new Promise((_, reject) =>
-    setTimeout(() => reject(new ApiError(message, code)), latency),
-  );
+export function mockFailure(message: string, code: ApiError["code"] = "VALIDATION_ERROR", latency = MOCK_LATENCY_MS): Promise<never> {
+  return new Promise((_, reject) => setTimeout(() => reject(new ApiError(message, code)), latency));
 }
 
 // --- public client -----------------------------------------------------------
@@ -197,21 +155,13 @@ export const apiClient = {
   get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     return withRetry(() => axiosClient.get<T>(url, config).then((r) => r.data));
   },
-  post<T>(
-    url: string,
-    body?: unknown,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  post<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
     return axiosClient.post<T>(url, body, config).then((r) => r.data);
   },
   put<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
     return axiosClient.put<T>(url, body, config).then((r) => r.data);
   },
-  patch<T>(
-    url: string,
-    body?: unknown,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  patch<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
     return axiosClient.patch<T>(url, body, config).then((r) => r.data);
   },
   delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {

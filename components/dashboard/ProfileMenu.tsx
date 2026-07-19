@@ -25,8 +25,7 @@ export default function ProfileMenu({ student }: { student: MenuStudent }) {
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node))
-        setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
@@ -53,13 +52,8 @@ export default function ProfileMenu({ student }: { student: MenuStudent }) {
         <div className="absolute right-0 top-12 z-40 w-56">
           <div className="glass-card animate-pop-in rounded-2xl p-2">
             <div className="border-b border-ink/10 px-3 py-2.5">
-              <p className="truncate text-sm font-semibold text-ink">
-                {student.name}
-              </p>
-              <p className="text-xs text-ink-soft">
-                Level {student.level} &middot; {student.coins.toLocaleString()}{" "}
-                coins
-              </p>
+              <p className="truncate text-sm font-semibold text-ink">{student.name}</p>
+              <p className="text-xs text-ink-soft">Level {student.level} &middot; {student.coins.toLocaleString()} coins</p>
             </div>
 
             <div className="flex flex-col py-1.5">

@@ -20,10 +20,7 @@ export interface UseApiResult<T> {
  * that list (mirroring useEffect/useMemo's own API), so pass an inline
  * arrow function and control refetching entirely through `deps`.
  */
-export function useApi<T>(
-  fn: () => Promise<T>,
-  deps: unknown[] = [],
-): UseApiResult<T> {
+export function useApi<T>(fn: () => Promise<T>, deps: unknown[] = []): UseApiResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
@@ -40,12 +37,7 @@ export function useApi<T>(
         if (!cancelled) setData(result);
       })
       .catch((err) => {
-        if (!cancelled)
-          setError(
-            err instanceof ApiError
-              ? err
-              : new ApiError("Something went wrong.", "UNKNOWN"),
-          );
+        if (!cancelled) setError(err instanceof ApiError ? err : new ApiError("Something went wrong.", "UNKNOWN"));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);

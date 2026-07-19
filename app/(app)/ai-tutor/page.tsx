@@ -7,14 +7,8 @@ import { TutorApi } from "@/services/tutor.api";
 export const metadata: Metadata = { title: "AI Tutor - Page.AI" };
 
 export default async function AiTutorPage() {
-  const {
-    capabilities: tutorCapabilities,
-    examplePrompts: tutorExamplePrompts,
-  } = await TutorApi.getCapabilities();
-  const chips: ChatChip[] = tutorExamplePrompts.map((label) => ({
-    label,
-    icon: "sparkle",
-  }));
+  const { capabilities: tutorCapabilities, examplePrompts: tutorExamplePrompts } = await TutorApi.getCapabilities();
+  const chips: ChatChip[] = tutorExamplePrompts.map((label) => ({ label, icon: "sparkle" }));
 
   async function sendToTutor(message: string) {
     "use server";
@@ -40,9 +34,7 @@ export default async function AiTutorPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-signal-soft text-signal-deep">
               <Icon name={cap.icon} className="h-4 w-4" />
             </div>
-            <span className="text-xs font-medium leading-tight text-ink">
-              {cap.label}
-            </span>
+            <span className="text-xs font-medium leading-tight text-ink">{cap.label}</span>
           </div>
         ))}
       </div>

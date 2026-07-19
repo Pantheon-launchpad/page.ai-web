@@ -6,10 +6,7 @@ import { AdminApi } from "@/services/admin.api";
 export const metadata: Metadata = { title: "Users - Admin - Page.AI" };
 
 export default async function AdminUsersPage() {
-  const { items: users, total } = await AdminApi.getUsers({
-    page: 1,
-    pageSize: 50,
-  });
+  const { items: users, total } = await AdminApi.getUsers({ page: 1, pageSize: 50 });
 
   return (
     <div className="flex flex-col gap-6">

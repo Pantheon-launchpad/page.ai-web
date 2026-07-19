@@ -18,10 +18,7 @@ export const ChatApi = {
    * POST /chat/:sourceId/message
    * Body: { message: string }
    */
-  async sendMessage(
-    _sourceId: string,
-    _message: string,
-  ): Promise<{ reply: string }> {
+  async sendMessage(_sourceId: string, _message: string): Promise<{ reply: string }> {
     return mockResponse({
       reply:
         "Good question. Give me a moment to find that in the chapter - meanwhile, tell me: do you want the short version or the deep dive?",

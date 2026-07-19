@@ -25,10 +25,7 @@ export default function SignalMark({
   const anims = ["bar-anim-1", "bar-anim-2", "bar-anim-3", "bar-anim-4"];
 
   return (
-    <span
-      className={`inline-flex items-end gap-[3px] ${className}`}
-      aria-hidden="true"
-    >
+    <span className={`inline-flex items-end gap-[3px] ${className}`} aria-hidden="true">
       {heights.map((h, i) => (
         <span
           key={i}

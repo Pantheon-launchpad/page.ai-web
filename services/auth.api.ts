@@ -1,11 +1,5 @@
 import { mockResponse, mockFailure, tokenStore } from "@/lib/api";
-import type {
-  AuthResponse,
-  LoginRequest,
-  SignupRequest,
-  GoogleAuthRequest,
-  User,
-} from "@/types";
+import type { AuthResponse, LoginRequest, SignupRequest, GoogleAuthRequest, User } from "@/types";
 
 const MOCK_USER: User = {
   id: "u_demo_1",
