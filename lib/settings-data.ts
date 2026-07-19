@@ -2,24 +2,14 @@ export const downloadedItems = [
   { id: "d1", name: "Physics - Full Subject", size: 340, type: "Subject" },
   { id: "d2", name: "Chemistry - Full Subject", size: 295, type: "Subject" },
   { id: "d3", name: "Biology - Full Subject", size: 410, type: "Subject" },
-  {
-    id: "d4",
-    name: "WAEC Physics Past Questions 2019–2023",
-    size: 62,
-    type: "Resource",
-  },
+  { id: "d4", name: "WAEC Physics Past Questions 2019–2023", size: 62, type: "Resource" },
   { id: "d5", name: "AI Tutor Model", size: 890, type: "Model" },
 ];
 
 export const storageTotalMB = 4096;
 
 export const premiumFeatures = {
-  free: [
-    "3 subjects downloaded at once",
-    "50 AI Tutor questions / day",
-    "Basic analytics",
-    "Community support",
-  ],
+  free: ["3 subjects downloaded at once", "50 AI Tutor questions / day", "Basic analytics", "Community support"],
   premium: [
     "Unlimited subjects, fully offline",
     "Unlimited AI Tutor & Chat with Book",

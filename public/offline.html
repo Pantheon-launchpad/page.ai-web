@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page.AI - Offline</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f6eee1;
+      color: #16213a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 380px;
+    }
+    .bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+    .bars span {
+      width: 8px;
+      border-radius: 3px;
+      background: #2e5fea;
+    }
+    .bars span:nth-child(1) { height: 12px; }
+    .bars span:nth-child(2) { height: 20px; }
+    .bars span:nth-child(3) { height: 28px; }
+    .bars span:nth-child(4) { height: 36px; }
+    h1 { font-size: 1.3rem; margin: 0 0 8px; }
+    p { color: #565f78; line-height: 1.6; margin: 0 0 24px; font-size: 0.95rem; }
+    button {
+      border: none;
+      background: #16213a;
+      color: #f6eee1;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="bars"><span></span><span></span><span></span><span></span></div>
+    <h1>This page hasn't been saved yet</h1>
+    <p>
+      Page.AI works best offline once you've visited a page - this particular one hasn't loaded
+      on this device yet. Reconnect once to fetch it, and it'll be available offline from then on.
+    </p>
+    <button onclick="location.reload()">Try again</button>
+  </div>
+</body>
+</html>

@@ -11,16 +11,14 @@ import { WalletApi } from "@/services/wallet.api";
 export const metadata: Metadata = { title: "Earn - Page.AI" };
 
 export default async function EarnPage() {
-  const [dailyMissions, wallet, storeItems, coinsByCategory, transactions] =
-    await Promise.all([
-      WalletApi.getMissions(),
-      WalletApi.getWallet(),
-      WalletApi.getStoreItems(),
-      WalletApi.getCoinsByCategory(),
-      WalletApi.getTransactions(),
-    ]);
-  const totalCategoryCoins =
-    coinsByCategory.reduce((sum, c) => sum + c.coins, 0) || 1;
+  const [dailyMissions, wallet, storeItems, coinsByCategory, transactions] = await Promise.all([
+    WalletApi.getMissions(),
+    WalletApi.getWallet(),
+    WalletApi.getStoreItems(),
+    WalletApi.getCoinsByCategory(),
+    WalletApi.getTransactions(),
+  ]);
+  const totalCategoryCoins = coinsByCategory.reduce((sum, c) => sum + c.coins, 0) || 1;
 
   return (
     <div className="flex flex-col gap-8">
@@ -39,17 +37,13 @@ export default async function EarnPage() {
       </div>
 
       <section>
-        <h2 className="mb-4 font-display text-lg font-semibold text-ink">
-          Daily learning missions
-        </h2>
+        <h2 className="mb-4 font-display text-lg font-semibold text-ink">Daily learning missions</h2>
         <MissionsCard missions={dailyMissions} />
       </section>
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-ink">
-            Rewards store
-          </h2>
+          <h2 className="font-display text-lg font-semibold text-ink">Rewards store</h2>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-ember-soft px-3 py-1.5 font-mono text-xs text-ember">
             <Icon name="coin" className="h-3.5 w-3.5" />
             {wallet.storeCredit.toLocaleString()} available
@@ -57,11 +51,7 @@ export default async function EarnPage() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {storeItems.map((item) => (
-            <StoreItemCard
-              key={item.id}
-              item={item}
-              balance={wallet.storeCredit}
-            />
+            <StoreItemCard key={item.id} item={item} balance={wallet.storeCredit} />
           ))}
         </div>
         <p className="mt-3 text-xs text-ink-faint">
@@ -71,9 +61,7 @@ export default async function EarnPage() {
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.2fr]">
         <div className="glass-card rounded-3xl p-6">
-          <h3 className="font-display text-[1.05rem] font-semibold text-ink">
-            Where your coins come from
-          </h3>
+          <h3 className="font-display text-[1.05rem] font-semibold text-ink">Where your coins come from</h3>
           <div className="mt-4 flex h-3 w-full overflow-hidden rounded-full bg-ink/5">
             {coinsByCategory.map((c) => (
               <div
@@ -86,26 +74,17 @@ export default async function EarnPage() {
           </div>
           <div className="mt-4 flex flex-col gap-2">
             {coinsByCategory.map((c) => (
-              <div
-                key={c.name}
-                className="flex items-center gap-2 text-sm text-ink-soft"
-              >
-                <span
-                  className={`h-2.5 w-2.5 rounded-full ${accent[c.color].bar}`}
-                />
+              <div key={c.name} className="flex items-center gap-2 text-sm text-ink-soft">
+                <span className={`h-2.5 w-2.5 rounded-full ${accent[c.color].bar}`} />
                 <span className="flex-1">{c.name}</span>
-                <span className="font-mono text-ink-faint">
-                  {c.coins.toLocaleString()}
-                </span>
+                <span className="font-mono text-ink-faint">{c.coins.toLocaleString()}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div className="glass-card rounded-3xl p-6">
-          <h3 className="font-display text-[1.05rem] font-semibold text-ink">
-            Transaction history
-          </h3>
+          <h3 className="font-display text-[1.05rem] font-semibold text-ink">Transaction history</h3>
           <div className="mt-4">
             <TransactionList transactions={transactions} />
           </div>
@@ -115,24 +94,14 @@ export default async function EarnPage() {
   );
 }
 
-function HeroStat({
-  label,
-  value,
-  prefix = "",
-}: {
-  label: string;
-  value: number;
-  prefix?: string;
-}) {
+function HeroStat({ label, value, prefix = "" }: { label: string; value: number; prefix?: string }) {
   return (
     <div className="glass-card-deep rounded-2xl p-4">
       <div className="font-display text-xl font-semibold text-white">
         {prefix}
         <AnimatedCounter value={value} />
       </div>
-      <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-white/50">
-        {label}
-      </div>
+      <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-white/50">{label}</div>
     </div>
   );
 }

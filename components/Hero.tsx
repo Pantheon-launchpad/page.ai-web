@@ -4,10 +4,7 @@ import Appear from "./Appear";
 
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative px-6 pb-20 pt-10 md:px-10 md:pb-28 md:pt-16"
-    >
+    <section id="top" className="relative px-6 pb-20 pt-10 md:px-10 md:pb-28 md:pt-16">
       {/* ambient drifting blobs - contained to this section only, never clip descendants */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="animate-drift-1 absolute -left-24 top-10 h-72 w-72 rounded-full bg-signal/15 blur-3xl" />
@@ -32,9 +29,9 @@ export default function Hero() {
 
           <Appear delay={160}>
             <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-ink-soft">
-              Full lessons, quizzes, and a patient AI tutor in one app. Works on
-              the back of a bus, in a village with no towers, or at 30,000 feet
-              with the WiFi off.
+              Full lessons, quizzes, and a patient AI tutor in one app.
+              Works on the back of a bus, in a village with no towers,
+              or at 30,000 feet with the WiFi off.
             </p>
           </Appear>
 
@@ -52,9 +49,7 @@ export default function Hero() {
                 className="group inline-flex items-center gap-2 text-sm font-medium text-ink"
               >
                 See how it works
-                <span className="transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
             </div>
           </Appear>

@@ -22,25 +22,15 @@ export const UploadApi = {
    * Body: { fileName, contentType, kind }
    * Returns a signed URL the client uploads directly to (S3-style flow).
    */
-  async getSignedUploadUrl(
-    fileName: string,
-    _kind: UploadKind,
-  ): Promise<{ uploadUrl: string; fileId: string }> {
-    return mockResponse({
-      uploadUrl: `mock://uploads/${fileName}`,
-      fileId: `file_${Date.now()}`,
-    });
+  async getSignedUploadUrl(fileName: string, _kind: UploadKind): Promise<{ uploadUrl: string; fileId: string }> {
+    return mockResponse({ uploadUrl: `mock://uploads/${fileName}`, fileId: `file_${Date.now()}` });
   },
 
   /**
    * POST /uploads/:fileId/confirm - called after the direct-to-storage PUT
    * succeeds, so the backend can persist metadata.
    */
-  async confirmUpload(
-    fileId: string,
-    file: File,
-    kind: UploadKind,
-  ): Promise<UploadedFile> {
+  async confirmUpload(fileId: string, file: File, kind: UploadKind): Promise<UploadedFile> {
     return mockResponse({
       id: fileId,
       url: `mock://cdn/${file.name}`,

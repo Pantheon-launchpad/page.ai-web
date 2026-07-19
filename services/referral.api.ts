@@ -1,21 +1,12 @@
 import { mockResponse } from "@/lib/api";
-import {
-  referral,
-  referralSteps,
-  referralMilestones,
-  recentReferrals,
-} from "@/lib/rewards-data";
+import { referral, referralSteps, referralMilestones, recentReferrals } from "@/lib/rewards-data";
 
 export const ReferralApi = {
   /**
    * GET /referrals
    */
   async getReferralSummary() {
-    return mockResponse({
-      referral,
-      steps: referralSteps,
-      milestones: referralMilestones,
-    });
+    return mockResponse({ referral, steps: referralSteps, milestones: referralMilestones });
   },
 
   /**

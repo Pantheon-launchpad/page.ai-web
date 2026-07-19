@@ -20,36 +20,24 @@ export default async function WeakAreasPage() {
 
       <div className="flex flex-col gap-4">
         {weakAreas.map((area) => (
-          <div
-            key={area.topic}
-            className="glass-card flex flex-col gap-4 rounded-3xl p-6 sm:flex-row sm:items-center sm:justify-between"
-          >
+          <div key={area.topic} className="glass-card flex flex-col gap-4 rounded-3xl p-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3.5">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ember-soft text-ember">
                 <Icon name="weak" className="h-5 w-5" />
               </div>
               <div>
-                <p className="font-display text-base font-semibold text-ink">
-                  {area.topic}
-                </p>
+                <p className="font-display text-base font-semibold text-ink">{area.topic}</p>
                 <p className="text-xs text-ink-soft">{area.subject}</p>
-                <p className="mt-1.5 max-w-md text-sm text-ink-soft">
-                  {area.note}
-                </p>
+                <p className="mt-1.5 max-w-md text-sm text-ink-soft">{area.note}</p>
               </div>
             </div>
 
             <div className="flex shrink-0 items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
               <div className="flex items-center gap-2">
                 <div className="h-1.5 w-24 overflow-hidden rounded-full bg-ink/10">
-                  <div
-                    className="h-full rounded-full bg-ember"
-                    style={{ width: `${area.mastery}%` }}
-                  />
+                  <div className="h-full rounded-full bg-ember" style={{ width: `${area.mastery}%` }} />
                 </div>
-                <span className="font-mono text-xs text-ink-faint">
-                  {area.mastery}%
-                </span>
+                <span className="font-mono text-xs text-ink-faint">{area.mastery}%</span>
               </div>
               <Link
                 href="/practice"

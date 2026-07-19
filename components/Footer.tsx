@@ -1,4 +1,5 @@
 import SignalMark from "./SignalMark";
+import InstallButton from "./pwa/InstallButton";
 
 export default function Footer() {
   return (
@@ -14,6 +15,9 @@ export default function Footer() {
               Learning that works everywhere, even with no signal.
               An AI tutor and full lessons, offline.
             </p>
+            <div className="mt-5">
+              <InstallButton />
+            </div>
           </div>
 
           <div>

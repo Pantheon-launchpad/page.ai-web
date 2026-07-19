@@ -1,11 +1,5 @@
 import { mockResponse } from "@/lib/api";
-import {
-  questionsFor,
-  topicsFor,
-  subjectList,
-  type Difficulty,
-  type Question,
-} from "@/lib/practice-data";
+import { questionsFor, topicsFor, subjectList, type Difficulty, type Question } from "@/lib/practice-data";
 
 export interface PracticeFilter {
   subject?: string;
@@ -41,10 +35,7 @@ export const PracticeApi = {
    * Records an attempt server-side for analytics/mastery - fire-and-forget
    * from the UI's perspective.
    */
-  async recordAttempt(
-    _questionId: string,
-    _chosenIndex: number | null,
-  ): Promise<{ success: true }> {
+  async recordAttempt(_questionId: string, _chosenIndex: number | null): Promise<{ success: true }> {
     return mockResponse({ success: true as const });
   },
 };

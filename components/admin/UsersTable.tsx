@@ -11,11 +11,7 @@ const statusTone: Record<AdminUser["status"], string> = {
   banned: "bg-ink/10 text-ink-faint",
 };
 
-export default function UsersTable({
-  initialUsers,
-}: {
-  initialUsers: AdminUser[];
-}) {
+export default function UsersTable({ initialUsers }: { initialUsers: AdminUser[] }) {
   const [users, setUsers] = useState(initialUsers);
   const [query, setQuery] = useState("");
   const [pendingId, setPendingId] = useState<string | null>(null);
@@ -23,10 +19,7 @@ export default function UsersTable({
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return users;
-    return users.filter(
-      (u) =>
-        u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q),
-    );
+    return users.filter((u) => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
   }, [users, query]);
 
   async function updateStatus(id: string, status: AdminUser["status"]) {
@@ -47,10 +40,7 @@ export default function UsersTable({
   return (
     <div className="flex flex-col gap-4">
       <div className="relative max-w-sm">
-        <Icon
-          name="search"
-          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint"
-        />
+        <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -64,24 +54,12 @@ export default function UsersTable({
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead>
               <tr className="border-b border-ink/10 text-ink-faint">
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Student
-                </th>
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Role
-                </th>
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Coins
-                </th>
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Last active
-                </th>
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Status
-                </th>
-                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">
-                  Actions
-                </th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Student</th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Role</th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Coins</th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Last active</th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Status</th>
+                <th className="px-5 py-3 font-mono text-[10.5px] font-medium uppercase tracking-wide">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-ink/10">
@@ -93,30 +71,18 @@ export default function UsersTable({
                         {u.avatarInitial}
                       </div>
                       <div className="min-w-0">
-                        <p className="truncate font-medium text-ink">
-                          {u.name}
-                        </p>
-                        <p className="truncate text-xs text-ink-soft">
-                          {u.email}
-                        </p>
+                        <p className="truncate font-medium text-ink">{u.name}</p>
+                        <p className="truncate text-xs text-ink-soft">{u.email}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-5 py-3.5 text-ink-soft capitalize">
-                    {u.role.replace("_", " ")}
-                  </td>
+                  <td className="px-5 py-3.5 text-ink-soft capitalize">{u.role.replace("_", " ")}</td>
+                  <td className="px-5 py-3.5 text-ink-soft">{u.coinsBalance.toLocaleString()}</td>
                   <td className="px-5 py-3.5 text-ink-soft">
-                    {u.coinsBalance.toLocaleString()}
-                  </td>
-                  <td className="px-5 py-3.5 text-ink-soft">
-                    {u.lastActiveAt
-                      ? new Date(u.lastActiveAt).toLocaleDateString()
-                      : "-"}
+                    {u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleDateString() : "-"}
                   </td>
                   <td className="px-5 py-3.5">
-                    <span
-                      className={`rounded-full px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide ${statusTone[u.status]}`}
-                    >
+                    <span className={`rounded-full px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wide ${statusTone[u.status]}`}>
                       {u.status}
                     </span>
                   </td>

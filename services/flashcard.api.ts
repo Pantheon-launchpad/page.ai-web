@@ -18,14 +18,8 @@ export const FlashcardApi = {
    * Production implementation would run an SM-2-style spaced repetition
    * update server-side and return the next due date.
    */
-  async reviewCard(
-    _deckId: string,
-    _cardId: string,
-    _rating: ReviewRating,
-  ): Promise<{ nextDueAt: string }> {
-    return mockResponse({
-      nextDueAt: new Date(Date.now() + 86_400_000).toISOString(),
-    });
+  async reviewCard(_deckId: string, _cardId: string, _rating: ReviewRating): Promise<{ nextDueAt: string }> {
+    return mockResponse({ nextDueAt: new Date(Date.now() + 86_400_000).toISOString() });
   },
 
   /**

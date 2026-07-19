@@ -17,7 +17,6 @@ app/
 ```
 
 Each route group has its own shell layout (sidebar + topbar) but all three share:
-
 - The same design tokens (`app/globals.css` - CSS custom properties, so the whole app re-themes via `.dark`/`.soft` class overrides)
 - The same icon system (`components/dashboard/icons.tsx` - a single `<Icon name="..."/>` component over hand-drawn SVG paths, no icon library dependency)
 - The same service layer (below)
@@ -69,7 +68,6 @@ Every method has a JSDoc comment naming its real endpoint (`GET /subjects`) - th
 ## 4. API Client
 
 `lib/api/client.ts` wraps `axios` with:
-
 - **Base config** - base URL and timeout from `lib/api/config.ts` (env-driven: `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_API_MODE`)
 - **Request interceptor** - attaches `Authorization: Bearer <token>` from `tokenStore` (currently `localStorage`; swap for httpOnly cookies server-side if you want stronger XSS protection - see §19)
 - **Response interceptor** - on a 401 in production mode, attempts one silent refresh via `/auth/refresh` and retries the original request once; normalizes all errors into `ApiError` with a stable `code` (`UNAUTHORIZED`, `VALIDATION_ERROR`, `NETWORK_ERROR`, `TIMEOUT`, etc.)
@@ -82,13 +80,11 @@ To go live: implement the real Express endpoints, set `NEXT_PUBLIC_API_MODE=prod
 ## 5. Authentication Architecture
 
 Prepared, not wired in:
-
 - `providers/AuthProvider.tsx` - session context, exposes `{ user, loading, login, signup, logout }`
 - `lib/api/client.ts`'s `tokenStore` - access/refresh token persistence + the interceptor-driven refresh dance described above
 - `types/auth.ts` - `Role`, `User`, `AuthTokens`, request/response shapes, including `Role = "student" | "teacher" | "school_admin" | "moderator" | "super_admin"` for RBAC
 
 **Why `AuthProvider` isn't mounted in `app/layout.tsx` yet:** the current app has no route guarding at all - every page under `(app)` is reachable directly with no login check. Wrapping the tree in `AuthProvider` is harmless on its own (it just loads a session in the background), but the natural next step - a `<RequireAuth>` wrapper redirecting unauthenticated visitors - is a real behavior change, and the frontend-freeze instructions for this pass explicitly ruled out changing existing UX. **When real auth exists:**
-
 1. Mount `<AuthProvider>` in `app/layout.tsx` (wrap `{children}`, alongside the existing `<ThemeProvider>`)
 2. Add a `RequireAuth` component that redirects to `/login` when `!user && !loading`, and wrap `app/(app)/layout.tsx`'s children in it
 3. Add the equivalent `RequireAdminRole` guard for `app/(admin)/layout.tsx`, checking `user.role !== 'student'`
@@ -96,7 +92,6 @@ Prepared, not wired in:
 ## 6. State Management
 
 Two context providers exist, following the same shape, both currently unmounted for the same reason as `AuthProvider`:
-
 - `providers/AuthProvider.tsx` - current user/session
 - `providers/WalletProvider.tsx` - coin balance, so a mission claim or store redemption can update the balance shown in the Topbar/Earn page/Dashboard simultaneously without a full page reload
 
@@ -109,11 +104,9 @@ Not yet built (same pattern, straightforward to add when needed): Notifications,
 Every `lib/*-data.ts` file is the "mock backend" - plain arrays/objects that the service layer's mock implementations read from. This is intentionally the same shape the real MongoDB documents should take (see §14's schema sketches, which mirror these files closely). When wiring up MongoDB, the fastest path is: seed collections from these exact mock files, then confirm each service's real implementation returns matching shapes.
 
 ## 8. Offline Architecture
-
-_(Prepared for; the current Next.js web build does not implement this - it's aimed at the Electron/Flutter production clients described in the product docs.)_
+*(Prepared for; the current Next.js web build does not implement this - it's aimed at the Electron/Flutter production clients described in the product docs.)*
 
 Recommended shape once needed:
-
 - **IndexedDB** (web) / **SQLite** (Electron/Flutter, via a shared abstraction interface) for cached subjects, questions, attempts, and mistakes
 - **Sync manager** - a queue of pending mutations (attempts, mission claims, chat messages) made while offline, flushed opportunistically when connectivity returns; conflict resolution should be last-write-wins for simple counters (streak, coins) and append-only for logs (attempts, mistakes) to avoid data loss
 - **Request queue** - wrap `apiClient`'s POST/PATCH/DELETE methods so that a network failure enqueues the request instead of throwing, and a background flush retries in order
@@ -141,7 +134,6 @@ The mock replies in `TutorApi`/`ChatApi` are simple canned strings - the actual 
 ## 10. File Upload Architecture
 
 `services/upload.api.ts` implements the signed-URL pattern:
-
 1. Client calls `getSignedUploadUrl(fileName, kind)` → backend returns a pre-signed PUT URL (S3/R2/GCS) + a `fileId`
 2. Client PUTs the file bytes directly to that URL (never through the Express server)
 3. Client calls `confirmUpload(fileId, file, kind)` → backend persists metadata (size, owner, kind, CDN URL) to `uploaded_files`
@@ -188,7 +180,6 @@ Recommended build order, front-loading what unblocks the most frontend value fas
 ## 13. Migration from Mock APIs to Production APIs
 
 Per service file, the change is mechanical:
-
 ```ts
 // Before
 async getSubjects(): Promise<Subject[]> {
@@ -200,7 +191,6 @@ async getSubjects(): Promise<Subject[]> {
   return apiClient.get<Subject[]>("/subjects");
 }
 ```
-
 No caller changes - every page already calls `SubjectApi.getSubjects()`, not the mock data directly. Suggested rollout: migrate one service at a time, verify its consuming page(s) (listed in `API_CONTRACT.md`) against a staging backend, then move to the next. `lib/api/config.ts`'s `API_MODE` can be flipped per-environment via `NEXT_PUBLIC_API_MODE` without a code change.
 
 ## 14. MongoDB Collections & Mongoose Model Sketches

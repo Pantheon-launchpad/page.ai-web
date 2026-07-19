@@ -55,10 +55,7 @@ export const AiApi = {
    * token-by-token (see `streamChat` below) - this non-streaming variant
    * exists for simpler call sites (e.g. a single canned-style reply).
    */
-  async chat(
-    messages: AiMessage[],
-    _provider: AiProvider = "gemma-ondevice",
-  ): Promise<{ reply: string }> {
+  async chat(messages: AiMessage[], _provider: AiProvider = "gemma-ondevice"): Promise<{ reply: string }> {
     const last = messages[messages.length - 1]?.content ?? "";
     return mockResponse({ reply: `(mock) Thinking about: "${last}"` });
   },
@@ -70,11 +67,7 @@ export const AiApi = {
    * the AI Tutor and Chat with Book UI. Mock mode fakes the same shape by
    * chunking a canned string.
    */
-  async streamChat(
-    messages: AiMessage[],
-    onToken: (token: string) => void,
-    _provider: AiProvider = "gemma-ondevice",
-  ): Promise<void> {
+  async streamChat(messages: AiMessage[], onToken: (token: string) => void, _provider: AiProvider = "gemma-ondevice"): Promise<void> {
     const reply = `(mock) Thinking about: "${messages[messages.length - 1]?.content ?? ""}"`;
     for (const word of reply.split(" ")) {
       onToken(word + " ");
@@ -91,8 +84,7 @@ export const AiApi = {
   async remediate(context: RemediationContext): Promise<RemediationResult> {
     return mockResponse({
       explanation: `Let's break down why "${context.studentChosenOption}" doesn't fit here, and rebuild toward "${context.correctOption}".`,
-      misconceptionSummary:
-        "A common mix-up between two related ideas in this topic.",
+      misconceptionSummary: "A common mix-up between two related ideas in this topic.",
       mnemonic: `Remember: think of ${context.topic} as a pattern, not a single fact.`,
       followUpQuestion: {
         stem: `A related question about ${context.topic}...`,
@@ -106,10 +98,7 @@ export const AiApi = {
   /**
    * POST /ai/mnemonic
    */
-  async generateMnemonic(
-    concept: string,
-    _subject: string,
-  ): Promise<{ mnemonic: string }> {
+  async generateMnemonic(concept: string, _subject: string): Promise<{ mnemonic: string }> {
     return mockResponse({ mnemonic: `A short memory hook for "${concept}".` });
   },
 
@@ -117,25 +106,15 @@ export const AiApi = {
    * POST /ai/vision - document/image understanding (e.g. a photographed
    * textbook page). Prepared, not implemented.
    */
-  async analyzeImage(
-    _file: File,
-    _prompt: string,
-  ): Promise<{ description: string }> {
-    return mockResponse({
-      description: "(mock) Image analysis is not yet implemented.",
-    });
+  async analyzeImage(_file: File, _prompt: string): Promise<{ description: string }> {
+    return mockResponse({ description: "(mock) Image analysis is not yet implemented." });
   },
 
   /**
    * POST /ai/documents - long-document processing (e.g. an uploaded PDF for
    * Chat with Book). Prepared, not implemented.
    */
-  async processDocument(
-    _fileId: string,
-  ): Promise<{ chapters: number; summary: string }> {
-    return mockResponse({
-      chapters: 1,
-      summary: "(mock) Document processing is not yet implemented.",
-    });
+  async processDocument(_fileId: string): Promise<{ chapters: number; summary: string }> {
+    return mockResponse({ chapters: 1, summary: "(mock) Document processing is not yet implemented." });
   },
 };
