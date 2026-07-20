@@ -1,5 +1,11 @@
-import { mockResponse, mockFailure, tokenStore } from "@/lib/api";
-import type { AuthResponse, LoginRequest, SignupRequest, GoogleAuthRequest, User } from "@/types";
+import { mockResponse, mockFailure, tokenStore, apiClient } from "@/lib/api";
+import type {
+  AuthResponse,
+  LoginRequest,
+  SignupRequest,
+  GoogleAuthRequest,
+  User,
+} from "@/types";
 
 const MOCK_USER: User = {
   id: "u_demo_1",
@@ -30,6 +36,13 @@ export const AuthApi = {
    * POST /auth/login
    */
   async login(payload: LoginRequest): Promise<AuthResponse> {
+    if (apiClient.mode === "production") {
+      const res = await apiClient.post<AuthResponse>("/auth/login", payload);
+      if (res.tokens) {
+        tokenStore.setTokens(res.tokens.accessToken, res.tokens.refreshToken);
+      }
+      return res;
+    }
     if (!payload.email || payload.password.length < 6) {
       return mockFailure("Invalid email or password.", "VALIDATION_ERROR");
     }
@@ -58,7 +71,14 @@ export const AuthApi = {
   /**
    * POST /auth/google
    */
-  async loginWithGoogle(_payload: GoogleAuthRequest): Promise<AuthResponse> {
+  async loginWithGoogle(payload: GoogleAuthRequest): Promise<AuthResponse> {
+    if (apiClient.mode === "production") {
+      const res = await apiClient.post<AuthResponse>("/auth/google", payload);
+      if (res.tokens) {
+        tokenStore.setTokens(res.tokens.accessToken, res.tokens.refreshToken);
+      }
+      return res;
+    }
     const tokens = fakeTokens();
     tokenStore.setTokens(tokens.accessToken, tokens.refreshToken);
     return mockResponse({ user: MOCK_USER, tokens });

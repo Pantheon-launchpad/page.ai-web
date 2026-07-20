@@ -1,30 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import GoogleIcon from "./GoogleIcon";
-import { AuthApi } from "@/services/auth.api";
+import { startOauth } from "@/services";
 
 export default function GoogleButton({
   label = "Continue with Google",
-  onSuccess,
 }: {
   label?: string;
   onSuccess?: () => void;
 }) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  async function handleClick() {
+  function handleClick() {
     setLoading(true);
-    // Frontend-only mock - no real Google Identity Services SDK wired up yet,
-    // so there's no real idToken. AuthApi.loginWithGoogle is the real
-    // integration point; swap this for the SDK's credential response once
-    // Google Sign-In is actually configured.
-    await AuthApi.loginWithGoogle({ idToken: "mock-id-token" });
-    setLoading(false);
-    if (onSuccess) onSuccess();
-    else router.push("/dashboard");
+    startOauth("google");
   }
 
   return (

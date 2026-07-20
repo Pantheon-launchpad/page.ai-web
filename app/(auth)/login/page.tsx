@@ -28,8 +28,9 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      await AuthApi.login({ email, password });
-      router.push("/dashboard");
+      const respone = await AuthApi.login({ email, password });
+      console.log(respone.user , respone.tokens)
+      router.replace("/dashboard");
     } catch (err) {
       setLoading(false);
       const message = err instanceof ApiError ? err.message : "Something went wrong. Try again.";
@@ -87,6 +88,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
+          onSubmit={handleSubmit}
           className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-signal py-3 text-sm font-medium text-white shadow-lift transition-transform hover:-translate-y-0.5 hover:bg-signal-deep disabled:opacity-70"
         >
           {loading ? "Logging in..." : "Log in"}

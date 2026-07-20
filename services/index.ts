@@ -25,3 +25,5 @@ export { UploadApi, type UploadKind, type UploadedFile } from "./upload.api";
 export { SearchApi, type SearchResult } from "./search.api";
 export { AiApi, type AiMessage, type AiProvider, type RemediationContext, type RemediationResult } from "./ai.api";
 export { AdminApi } from "./admin.api";
+export { startOauth, handleOauthCallback } from "./oauth";
+
