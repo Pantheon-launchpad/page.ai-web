@@ -11,10 +11,10 @@
 export type ApiMode = "mock" | "production";
 
 export const API_MODE: ApiMode =
-  (process.env.NEXT_PUBLIC_API_MODE as ApiMode) || "mock";
+  (process.env.NEXT_PUBLIC_API_MODE as ApiMode);
 
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000/api/v1";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://page-ai-web-backend.onrender.com/api/v1";
 
 export const API_TIMEOUT_MS = 15_000;
 

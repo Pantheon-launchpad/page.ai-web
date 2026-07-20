@@ -71,7 +71,8 @@ async function refreshAccessToken(): Promise<string | null> {
     refreshPromise = axios
       .post(`${API_BASE_URL}/auth/refresh`, { refreshToken })
       .then((res) => {
-        const { accessToken, refreshToken: newRefresh } = res.data ?? {};
+        const dataEnvelope = res.data ?? {};
+        const { accessToken, refreshToken: newRefresh } = dataEnvelope.data ?? {};
         if (accessToken) tokenStore.setTokens(accessToken, newRefresh);
         return accessToken ?? null;
       })
@@ -153,19 +154,19 @@ export const apiClient = {
   mode: API_MODE,
 
   get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return withRetry(() => axiosClient.get<T>(url, config).then((r) => r.data));
+    return withRetry(() => axiosClient.get<{ data: T }>(url, config).then((r) => r.data.data));
   },
   post<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
-    return axiosClient.post<T>(url, body, config).then((r) => r.data);
+    return axiosClient.post<{ data: T }>(url, body, config).then((r) => r.data.data);
   },
   put<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
-    return axiosClient.put<T>(url, body, config).then((r) => r.data);
+    return axiosClient.put<{ data: T }>(url, body, config).then((r) => r.data.data);
   },
   patch<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
-    return axiosClient.patch<T>(url, body, config).then((r) => r.data);
+    return axiosClient.patch<{ data: T }>(url, body, config).then((r) => r.data.data);
   },
   delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return axiosClient.delete<T>(url, config).then((r) => r.data);
+    return axiosClient.delete<{ data: T }>(url, config).then((r) => r.data.data);
   },
 
   /** Returns an AbortController wired up for request cancellation, e.g.

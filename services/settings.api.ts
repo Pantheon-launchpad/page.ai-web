@@ -1,4 +1,4 @@
-import { mockResponse } from "@/lib/api";
+import { apiClient, mockResponse } from "@/lib/api";
 
 export interface AppSettings {
   dailyReminder: boolean;
@@ -18,18 +18,27 @@ const DEFAULT_SETTINGS: AppSettings = {
   theme: "light",
 };
 
+let mockSettings = { ...DEFAULT_SETTINGS };
+
 export const SettingsApi = {
   /**
    * GET /settings
    */
   async getSettings(): Promise<AppSettings> {
-    return mockResponse(DEFAULT_SETTINGS);
+    if (apiClient.mode === "production") {
+      return apiClient.get<AppSettings>("/settings");
+    }
+    return mockResponse(mockSettings);
   },
 
   /**
    * PATCH /settings
    */
   async updateSettings(patch: Partial<AppSettings>): Promise<AppSettings> {
-    return mockResponse({ ...DEFAULT_SETTINGS, ...patch });
+    if (apiClient.mode === "production") {
+      return apiClient.patch<AppSettings>("/settings", patch);
+    }
+    mockSettings = { ...mockSettings, ...patch };
+    return mockResponse(mockSettings);
   },
 };

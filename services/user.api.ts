@@ -1,4 +1,4 @@
-import { mockResponse } from "@/lib/api";
+import { apiClient, mockResponse } from "@/lib/api";
 import { student } from "@/lib/dashboard-data";
 import type { User } from "@/types";
 
@@ -13,6 +13,9 @@ export const UserApi = {
    * GET /users/me
    */
   async getProfile(): Promise<Pick<User, "name" | "email" | "school" | "avatarInitial"> & typeof student> {
+    if (apiClient.mode === "production") {
+      return apiClient.get("/users/me");
+    }
     return mockResponse({
       ...student,
       name: student.name,
@@ -25,7 +28,10 @@ export const UserApi = {
   /**
    * PATCH /users/me
    */
-  async updateProfile(_payload: UpdateProfileRequest): Promise<{ success: true }> {
+  async updateProfile(payload: UpdateProfileRequest): Promise<{ success: true }> {
+    if (apiClient.mode === "production") {
+      return apiClient.patch<{ success: true }>("/users/me", payload);
+    }
     return mockResponse({ success: true as const });
   },
 
@@ -33,6 +39,9 @@ export const UserApi = {
    * DELETE /users/me
    */
   async deleteAccount(): Promise<{ success: true }> {
+    if (apiClient.mode === "production") {
+      return apiClient.delete<{ success: true }>("/users/me");
+    }
     return mockResponse({ success: true as const });
   },
 };
